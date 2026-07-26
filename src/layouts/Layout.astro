@@ -71,7 +71,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
   </head>
   <body>
-    <div class="reading-progress" id="reading-progress"></div>
     <CustomCursor />
     <NavBar />
 
@@ -83,20 +82,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       try {
         localStorage.setItem("theme", "dark");
       } catch {}
-
-      const updateProgress = () => {
-        const scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop;
-        const scrollHeight =
-          document.documentElement.scrollHeight - window.innerHeight;
-        const progress = (scrollTop / scrollHeight) * 100;
-        const progressBar = document.getElementById("reading-progress");
-        if (progressBar) {
-          progressBar.style.width = `${progress}%`;
-        }
-      };
-
-      window.addEventListener("scroll", updateProgress, { passive: true });
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(

@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AchievementCard from "../components/AchievementCard.astro";
+
+const achievements = [
+  {
+    title: "Hackathon Winner",
+    description:
+      "Built projects, competed with ideas, and learned a lot through hackathons.",
+  },
+  {
+    title: "JEE Mock Achievement",
+    description:
+      "Scored AIR 300 in a mock JEE test for 11th grade students.",
+  },
+  {
+    title: "Game Development",
+    description:
+      "Created games and interactive experiences using Roblox Studio and Lua.",
+  },
+];
+---
+
+<Layout title="Achievements | Aarav Gupta">
+  <main id="main-content" class="page">
+
+    <section>
+      <h1>Achievements</h1>
+
+      <div class="achievement-list">
+        {
+          achievements.map((achievement, index) => (
+            <AchievementCard
+              {...achievement}
+              index={index}
+            />
+          ))
+        }
+      </div>
+
+    </section>
+
+  </main>
+</Layout>
+
+
+<style>
+.page {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 8rem var(--container-padding) 4rem;
+}
+
+h1 {
+  color: var(--accent-color);
+  font-size: var(--section-size);
+  margin-bottom: 2rem;
+}
+
+.achievement-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+</style>

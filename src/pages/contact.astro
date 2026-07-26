@@ -1,0 +1,204 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contact | Aarav Gupta">
+  <main id="main-content" class="page">
+
+    <section class="contact">
+
+      <h1>Contact</h1>
+
+      <p class="intro">
+        Want to talk about a project, collaboration, or just something interesting?
+        Feel free to reach out.
+      </p>
+
+
+      <div class="links">
+
+        <a href="mailto:aaravgupta2709@proton.me">
+          aaravgupta2709@proton.me
+        </a>
+
+        <a
+          href="https://github.com/Aarav2709"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          github.com/Aarav2709
+        </a>
+
+        <a
+          href="https://linkedin.com/in/aarav2709"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          linkedin.com/in/aarav2709
+        </a>
+
+      </div>
+
+
+      <form
+        class="contact-form"
+        action="mailto:aaravgupta2709@proton.me"
+        method="post"
+        enctype="text/plain"
+      >
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Your name"
+          required
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          required
+        />
+
+        <textarea
+          name="message"
+          rows="5"
+          placeholder="Your message"
+          required
+        ></textarea>
+
+
+        <button type="submit">
+          send message
+        </button>
+
+      </form>
+
+    </section>
+
+  </main>
+</Layout>
+
+
+<style>
+
+.page {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 8rem var(--container-padding) 4rem;
+}
+
+
+.contact {
+  max-width: 48rem;
+}
+
+
+h1 {
+  font-size: var(--section-size);
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+
+.intro {
+  color: var(--secondary-text);
+  font-size: var(--font-size-large);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+
+.links {
+  display:flex;
+  flex-direction:column;
+  gap:.7rem;
+  margin-bottom:3rem;
+}
+
+
+.links a {
+  color:var(--primary-text);
+  width:fit-content;
+  border-bottom:1px dashed var(--border-color);
+}
+
+
+.links a:hover {
+  color:var(--accent-color);
+}
+
+
+.contact-form {
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+
+
+input,
+textarea {
+
+  width:100%;
+
+  padding:.8rem 0;
+
+  background:none;
+
+  border:none;
+  border-bottom:1px solid var(--border-color);
+
+  color:var(--primary-text);
+
+  font-family:var(--font-family);
+
+  font-size:1rem;
+
+}
+
+
+input:focus,
+textarea:focus {
+
+  outline:none;
+
+  border-color:var(--accent-color);
+
+}
+
+
+textarea {
+  resize:vertical;
+}
+
+
+button {
+
+  width:fit-content;
+
+  background:none;
+
+  color:var(--accent-color);
+
+  border:none;
+
+  border-bottom:1px dashed var(--accent-color);
+
+  padding:.3rem 0;
+
+  cursor:pointer;
+
+  font-family:var(--font-family);
+
+  font-size:1rem;
+
+}
+
+
+button:hover {
+  color:var(--primary-text);
+}
+
+
+</style>

@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+---
+
+<Layout title="About | Aarav Gupta">
+  <main id="main-content" class="page">
+    <section class="about">
+      <SectionHeader title="About" />
+
+      <div class="content">
+        <p>
+          Hey, I'm Aarav. I like building things with code, whether that's
+          websites, games, tools, or random ideas that I want to bring to life.
+        </p>
+
+        <p>
+          I enjoy exploring different parts of development, from making
+          interfaces look good to writing the systems that power them.
+        </p>
+
+        <p>
+          Things I work with:
+        </p>
+
+        <ul>
+          <li>Go</li>
+          <li>TypeScript</li>
+          <li>Python</li>
+          <li>Lua</li>
+          <li>Astro</li>
+          <li>Game Development</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+.page {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 8rem var(--container-padding) 4rem;
+}
+
+.content {
+  margin-top: 2rem;
+  max-width: 42rem;
+}
+
+p {
+  color: var(--secondary-text);
+  font-size: var(--font-size-large);
+  margin-bottom: 1.2rem;
+}
+
+ul {
+  margin-top: 1rem;
+  padding-left: 1.2rem;
+  color: var(--primary-text);
+}
+
+li {
+  margin: 0.4rem 0;
+}
+</style>

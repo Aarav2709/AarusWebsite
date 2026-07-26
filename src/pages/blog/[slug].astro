@@ -1,0 +1,105 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: {
+      slug: post.id,
+    },
+    props: {
+      post,
+    },
+  }));
+}
+
+const { post } = Astro.props;
+
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Aarav Gupta`}>
+
+<main id="main-content" class="page">
+
+<article>
+
+<h1>
+  {post.data.title}
+</h1>
+
+<p class="description">
+  {post.data.description}
+</p>
+
+{
+  post.data.date && (
+    <small>
+      {post.data.date.toDateString()}
+    </small>
+  )
+}
+
+<div class="content">
+  <Content />
+</div>
+
+</article>
+
+</main>
+
+</Layout>
+
+
+<style>
+
+.page {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 8rem var(--container-padding) 4rem;
+}
+
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--accent-color);
+}
+
+
+.description {
+  margin-top: 1rem;
+  color: var(--secondary-text);
+}
+
+
+small {
+  display:block;
+  margin-top:1rem;
+  color:var(--tertiary-text);
+}
+
+
+.content {
+  margin-top:3rem;
+  color:var(--primary-text);
+  line-height:1.8;
+}
+
+
+.content h2 {
+  margin-top:2rem;
+}
+
+
+.content p {
+  margin:1rem 0;
+}
+
+
+.content li {
+  margin-left:1.5rem;
+}
+
+</style>

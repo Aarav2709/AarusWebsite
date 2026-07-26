@@ -3,119 +3,98 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
+  <main id="main-content">
 
-<main id="main-content">
+    <section class="hero">
 
-<section class="hero">
+      <h1>
+        Aarav<br />
+        Gupta
+      </h1>
 
-<h1>
-  Aarav<br />
-  Gupta
-</h1>
+      <p>
+        15 year old developer building software, games, and developer tools.
+      </p>
 
+      <div class="links">
 
-<p>
-  Student developer building software, games, and developer tools.
-</p>
+        <a href="mailto:aaravgupta2709@proton.me">
+          Mail
+        </a>
 
+        <a href="https://github.com/Aarav2709">
+          Github
+        </a>
 
-<div class="links">
+        <a href="https://linkedin.com/in/aarav2709">
+          LinkedIn
+        </a>
 
-<a href="mailto:your@email.com">
-  Mail
-</a>
+      </div>
 
-<a href="https://github.com/Aarav2709">
-  Github
-</a>
+    </section>
 
-<a href="https://linkedin.com/in/aarav2709">
-  LinkedIn
-</a>
-
-</div>
-
-
-</section>
-
-</main>
-
-
+  </main>
 </Layout>
 
 
 <style>
 
-.hero{
+.hero {
+  min-height: 100vh;
 
-min-height:100vh;
+  display: flex;
+  flex-direction: column;
 
-display:flex;
-flex-direction:column;
+  justify-content: center;
+  align-items: center;
 
-justify-content:center;
-align-items:center;
-
-text-align:center;
-
+  text-align: center;
 }
 
 
-.hero h1{
+.hero h1 {
+  font-size: clamp(5rem, 12vw, 9rem);
 
-font-size:clamp(5rem,12vw,9rem);
+  line-height: .85;
 
-line-height:.85;
+  margin: 0;
 
-margin:0;
+  font-family: var(--font-display);
 
-font-family:var(--font-display);
-
-color:var(--accent-color);
-
+  color: var(--accent-color);
 }
 
 
+.hero p {
+  margin-top: 2rem;
 
-.hero p{
+  font-size: 1.1rem;
 
-margin-top:2rem;
+  color: var(--secondary-text);
 
-font-size:1.1rem;
-
-color:var(--secondary-text);
-
+  max-width: 35rem;
 }
 
 
+.links {
+  display: flex;
 
-.links{
+  gap: 1.2rem;
 
-display:flex;
-
-gap:1.2rem;
-
-margin-top:1.5rem;
-
+  margin-top: 1.5rem;
 }
 
 
+.links a {
+  color: var(--secondary-text);
 
-.links a{
-
-color:var(--secondary-text);
-
-text-decoration:none;
-
+  text-decoration: none;
 }
 
 
-
-.links a:hover{
-
-color:var(--primary-text);
-
+.links a:hover {
+  color: var(--primary-text);
 }
-
 
 </style>

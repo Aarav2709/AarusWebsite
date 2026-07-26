@@ -1,0 +1,94 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+
+const sortedPosts = posts.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout title="Blog | Aarav Gupta">
+
+<main id="main-content" class="page">
+
+<h1>Blog</h1>
+
+<div class="posts">
+
+{
+  sortedPosts.map((post) => (
+    <article class="post">
+
+      <a href={`/blog/${post.id.replace(".md", "")}`}>
+        <h2>{post.data.title}</h2>
+
+        <p>
+          {post.data.description}
+        </p>
+
+        <small>
+          {post.data.date.toDateString()}
+        </small>
+      </a>
+
+    </article>
+  ))
+}
+
+</div>
+
+</main>
+
+</Layout>
+
+
+<style>
+
+.page {
+  max-width:var(--container-max);
+  margin:auto;
+  padding:8rem var(--container-padding);
+}
+
+
+h1 {
+  color:var(--accent-color);
+  margin-bottom:2rem;
+}
+
+
+.posts {
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+
+
+.post {
+  border-bottom:1px solid var(--border-color);
+  padding-bottom:1.5rem;
+}
+
+
+.post a {
+  text-decoration:none;
+}
+
+
+h2 {
+  color:var(--primary-text);
+}
+
+
+p {
+  color:var(--secondary-text);
+}
+
+
+small {
+  color:var(--tertiary-text);
+}
+
+</style>
