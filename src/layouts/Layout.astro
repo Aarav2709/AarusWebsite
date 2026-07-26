@@ -1,4 +1,5 @@
 ---
+import "../styles/global.css";
 import NavBar from "../components/NavBar.astro";
 import CustomCursor from "../components/CustomCursor.astro";
 
@@ -68,16 +69,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         ],
       })}
     />
-    <link
-      rel="preload"
-      href="/fonts/SpaceGrotesk.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <style is:global>
-      @import "../styles/global.css";
-    </style>
   </head>
   <body>
     <div class="reading-progress" id="reading-progress"></div>

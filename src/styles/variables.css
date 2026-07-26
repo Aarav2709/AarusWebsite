@@ -8,43 +8,52 @@
   --bg-elevated: #2c373b;
   --bg-panel: rgba(46, 57, 62, 0.88);
   --bg-panel-strong: #344147;
+
   --fg-color: #e2dbc8;
   --primary-text: #e2dbc8;
   --secondary-text: #9fb191;
   --tertiary-text: #889a81;
+
   --border-color: rgba(167, 192, 128, 0.2);
   --hover-bg: rgba(167, 192, 128, 0.12);
+
   --glass-bg: rgba(35, 45, 49, 0.76);
+
   --edge-highlight: inset 0 1px 0 rgba(233, 236, 210, 0.06);
   --shadow-glass: 0 10px 28px rgba(17, 23, 24, 0.48);
   --shadow: 0 4px 10px rgba(17, 23, 24, 0.35);
   --shadow-raised: 0 22px 40px rgba(17, 23, 24, 0.52);
-  --pixel-shadow: 6px 6px 0 rgba(18, 24, 26, 0.42);
+  --pixel-shadow: none;
 
-  --font-family: "Pixelify Sans", "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: "Jersey 10", "Silkscreen", "Pixelify Sans", sans-serif;
-  --font-hand: "Schoolbell", cursive;
-  --font-mono: "JetBrains Mono", "Silkscreen", ui-monospace, "Cascadia Code", monospace;
+  /* Typography */
+  --font-family: "Satoshi", sans-serif;
+  --font-display: "Satoshi", sans-serif;
+  --font-hand: "Satoshi", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
   --hero-size: clamp(3.8rem, 10vw, 8rem);
   --section-size: clamp(1.65rem, 3.5vw, 2.3rem);
   --text-size: clamp(1rem, 1.5vw, 1.15rem);
 
   --font-size-xs: 0.76rem;
   --font-size-small: 0.92rem;
-  --font-size-base: 1.03rem;
-  --font-size-large: 1.18rem;
+  --font-size-base: 1rem;
+  --font-size-large: 1.125rem;
   --font-size-x-large: 1.5rem;
-  --font-size-xx-large: 2rem;
-  --font-size-xxx-large: 2.9rem;
+  --font-size-xx-large: 2.25rem;
+  --font-size-xxx-large: 3.5rem;
 
   --container-max: 64rem;
   --container-padding: 2rem;
+
   --section-padding: 5.5rem 0;
+
   --rounded-corner: 1rem;
   --rounded-corner-small: 0.65rem;
 
   --transition-smooth: all 0.24s cubic-bezier(0.22, 1, 0.36, 1);
   --transition-bounce: all 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+
   --blur: saturate(1.5) blur(0.85rem);
 }
 
