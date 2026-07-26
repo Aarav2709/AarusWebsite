@@ -1,8 +1,121 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
 ---
 
 <Layout>
-  <Header />
+
+<main id="main-content">
+
+<section class="hero">
+
+<h1>
+  Aarav<br />
+  Gupta
+</h1>
+
+
+<p>
+  Student developer building software, games, and developer tools.
+</p>
+
+
+<div class="links">
+
+<a href="mailto:your@email.com">
+  Mail
+</a>
+
+<a href="https://github.com/Aarav2709">
+  Github
+</a>
+
+<a href="https://linkedin.com/in/aarav2709">
+  LinkedIn
+</a>
+
+</div>
+
+
+</section>
+
+</main>
+
+
 </Layout>
+
+
+<style>
+
+.hero{
+
+min-height:100vh;
+
+display:flex;
+flex-direction:column;
+
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+}
+
+
+.hero h1{
+
+font-size:clamp(5rem,12vw,9rem);
+
+line-height:.85;
+
+margin:0;
+
+font-family:var(--font-display);
+
+color:var(--accent-color);
+
+}
+
+
+
+.hero p{
+
+margin-top:2rem;
+
+font-size:1.1rem;
+
+color:var(--secondary-text);
+
+}
+
+
+
+.links{
+
+display:flex;
+
+gap:1.2rem;
+
+margin-top:1.5rem;
+
+}
+
+
+
+.links a{
+
+color:var(--secondary-text);
+
+text-decoration:none;
+
+}
+
+
+
+.links a:hover{
+
+color:var(--primary-text);
+
+}
+
+
+</style>

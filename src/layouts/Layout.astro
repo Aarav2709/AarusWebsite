@@ -86,13 +86,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <slot />
 
-    <footer class="footer fade-in">
-      <div class="footer-inner">
-        <span class="footer-left">&copy; 2026 Aarav Gupta</span>
-        <span class="footer-right">Built with Astro</span>
-      </div>
-    </footer>
-
     <script>
       // Force dark theme globally and ignore prior stored preferences.
       document.documentElement.setAttribute("data-theme", "dark");
@@ -149,43 +142,3 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </script>
   </body>
 </html>
-
-<style>
-  .footer {
-    margin-top: 2.4rem;
-    padding: 1.5rem 0 2rem;
-    border-top: 1px solid rgba(167, 192, 128, 0.22);
-  }
-
-  .footer-inner {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-left,
-  .footer-right {
-    color: #afc297;
-    font-size: var(--font-size-xs);
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    font-family: var(--font-mono);
-  }
-
-  @media (max-width: 768px) {
-    .footer {
-      margin-top: 1.6rem;
-      padding: 1.1rem 0 1.5rem;
-    }
-
-    .footer-inner {
-      padding: 0 var(--container-padding);
-      flex-direction: column;
-      gap: 0.3rem;
-      align-items: flex-start;
-    }
-  }
-</style>

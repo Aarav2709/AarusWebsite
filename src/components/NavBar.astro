@@ -11,70 +11,66 @@ const navLinks = [
 
 <header id="site-nav">
   <nav>
-    <a href="#about" class="skip-link" tabindex="0">Skip to Main Content</a>
 
-    <a href="/" class="home-link" aria-label="Go to homepage">
-      <svg class="home-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-      </svg>
-      <span>Aarav Gupta</span>
+    <a href="#main-content" class="skip-link">
+      Skip to Main Content
     </a>
+
 
     <ul class="desktop-links">
       {
         navLinks.map((link) => (
           <li>
-            <a href={link.url} class="nav-link" data-scroll-link="true">
+            <a href={link.url} class="nav-link">
               {link.name}
             </a>
           </li>
         ))
       }
+
       <li>
         <a
-          href="https://github.com/Aarav2709/AarusPortfolio"
+          href="https://github.com/Aarav2709"
           target="_blank"
           rel="noopener noreferrer"
-          class="nav-link nav-icon-link"
-          aria-label="GitHub"
-          title="GitHub"
+          class="nav-link"
         >
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
+          GitHub
         </a>
       </li>
     </ul>
 
+
     <button
       id="mobile-menu-toggle"
       class="mobile-menu-toggle"
-      type="button"
+      aria-label="Open menu"
       aria-expanded="false"
-      aria-controls="mobile-sidebar"
-      aria-label="Open navigation menu"
     >
       <span></span>
       <span></span>
       <span></span>
     </button>
+
   </nav>
 </header>
 
-<div id="mobile-overlay" class="mobile-overlay" hidden></div>
 
-<aside id="mobile-sidebar" class="mobile-sidebar" aria-hidden="true">
-  <div class="mobile-sidebar-header">
-    <p>Navigate</p>
-    <button id="mobile-close" type="button" aria-label="Close navigation menu">x</button>
-  </div>
+<div id="mobile-overlay"></div>
 
-  <ul class="mobile-links">
+
+<aside id="mobile-sidebar">
+
+  <button id="mobile-close">
+    ×
+  </button>
+
+
+  <ul>
     {
       navLinks.map((link) => (
         <li>
-          <a href={link.url} class="nav-link" data-scroll-link="true">
+          <a href={link.url}>
             {link.name}
           </a>
         </li>
@@ -82,438 +78,322 @@ const navLinks = [
     }
   </ul>
 
-  <a
-    href="https://github.com/Aarav2709/AarusPortfolio"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="mobile-github"
-  >
-    Open Portfolio Repo
-  </a>
 </aside>
 
+
 <script>
-  const sectionNodes = document.querySelectorAll("section[id]");
-  const trackedLinks = Array.from(
-    document.querySelectorAll(
-      '#site-nav .nav-link[href^="#"], #mobile-sidebar .nav-link[href^="#"]',
-    ),
+const nav = document.querySelector("#site-nav");
+const toggle = document.querySelector("#mobile-menu-toggle");
+const sidebar = document.querySelector("#mobile-sidebar");
+const overlay = document.querySelector("#mobile-overlay");
+const close = document.querySelector("#mobile-close");
+
+
+const setMenu = (state:boolean)=>{
+  sidebar?.classList.toggle("open",state);
+  overlay?.classList.toggle("show",state);
+  toggle?.setAttribute(
+    "aria-expanded",
+    String(state)
   );
+};
 
-  const highlightLink = (sectionId: string) => {
-    trackedLinks.forEach((link) => {
-      if (!(link instanceof HTMLAnchorElement)) return;
-      const isActive = link.getAttribute("href") === `#${sectionId}`;
-      link.classList.toggle("active", isActive);
-    });
-  };
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          highlightLink(entry.target.id);
-        }
-      });
-    },
-    { rootMargin: "-38% 0px -52% 0px" },
-  );
+toggle?.addEventListener(
+  "click",
+  ()=>{
+    setMenu(!sidebar?.classList.contains("open"));
+  }
+);
 
-  sectionNodes.forEach((section) => observer.observe(section));
 
-  const nav = document.getElementById("site-nav");
-  const menuToggle = document.getElementById("mobile-menu-toggle");
-  const sidebar = document.getElementById("mobile-sidebar");
-  const overlay = document.getElementById("mobile-overlay");
-  const closeButton = document.getElementById("mobile-close");
+close?.addEventListener(
+  "click",
+  ()=>{
+    setMenu(false);
+  }
+);
 
-  const setSidebarOpen = (isOpen: boolean) => {
-    if (!sidebar || !overlay || !menuToggle) return;
 
-    sidebar.classList.toggle("open", isOpen);
-    sidebar.setAttribute("aria-hidden", String(!isOpen));
+overlay?.addEventListener(
+  "click",
+  ()=>{
+    setMenu(false);
+  }
+);
 
-    overlay.hidden = !isOpen;
-    overlay.classList.toggle("visible", isOpen);
 
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-    document.body.classList.toggle("mobile-nav-open", isOpen);
-  };
-
-  menuToggle?.addEventListener("click", () => {
-    const isOpen = sidebar?.classList.contains("open");
-    setSidebarOpen(!isOpen);
-  });
-
-  closeButton?.addEventListener("click", () => setSidebarOpen(false));
-  overlay?.addEventListener("click", () => setSidebarOpen(false));
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      setSidebarOpen(false);
+document.addEventListener(
+  "keydown",
+  (e)=>{
+    if(e.key==="Escape"){
+      setMenu(false);
     }
-  });
+  }
+);
 
-  document.querySelectorAll('[data-scroll-link="true"]').forEach((anchor) => {
-    if (!(anchor instanceof HTMLAnchorElement)) return;
 
-    anchor.addEventListener("click", (event) => {
-      const href = anchor.getAttribute("href");
-      if (!href || href === "#") return;
+let lastScroll = 0;
 
-      const target = document.querySelector(href);
-      if (!target) return;
 
-      event.preventDefault();
-      target.scrollIntoView({ behavior: "smooth" });
+window.addEventListener(
+  "scroll",
+  ()=>{
+    const current = window.scrollY;
 
-      if (window.matchMedia("(max-width: 900px)").matches) {
-        setSidebarOpen(false);
-      }
-    });
-  });
-
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-
-  nav?.addEventListener(
-    "animationend",
-    () => {
-      nav.style.animation = "none";
-    },
-    { once: true },
-  );
-
-  const updateNav = () => {
-    const currentScrollY = window.scrollY;
-    const isMobile = window.matchMedia("(max-width: 900px)").matches;
-
-    if (isMobile || document.body.classList.contains("mobile-nav-open")) {
-      nav?.classList.remove("nav-hidden");
-      lastScrollY = currentScrollY;
-      ticking = false;
-      return;
+    if(current > lastScroll && current > 100){
+      nav?.classList.add("hidden");
+    }
+    else{
+      nav?.classList.remove("hidden");
     }
 
-    if (currentScrollY > 80) {
-      if (currentScrollY - lastScrollY > 5) {
-        nav?.classList.add("nav-hidden");
-      } else if (lastScrollY - currentScrollY > 5) {
-        nav?.classList.remove("nav-hidden");
-      }
-    } else {
-      nav?.classList.remove("nav-hidden");
-    }
-
-    lastScrollY = currentScrollY;
-    ticking = false;
-  };
-
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!ticking) {
-        requestAnimationFrame(updateNav);
-        ticking = true;
-      }
-    },
-    { passive: true },
-  );
-
-  window.addEventListener("resize", () => {
-    if (!window.matchMedia("(max-width: 900px)").matches) {
-      setSidebarOpen(false);
-    }
-  });
+    lastScroll=current;
+  },
+  {passive:true}
+);
 </script>
 
+
 <style>
-  #site-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(167, 192, 128, 0.24);
-    background: linear-gradient(180deg, rgba(32, 39, 44, 0.92), rgba(43, 51, 57, 0.78));
-    animation: slideDown 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-    transition:
-      transform 0.36s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.32s ease;
-  }
 
-  #site-nav.nav-hidden {
-    transform: translateY(calc(-100% - 1rem));
-    opacity: 0;
-    pointer-events: none;
-  }
+#site-nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
 
-  nav {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 1.2rem;
-    max-width: var(--container-max);
-    width: 100%;
-    margin: 0 auto;
-    padding: 0.95rem var(--container-padding);
-    position: relative;
-  }
+  z-index:1000;
 
-  .skip-link {
-    position: absolute;
-    left: -9999px;
-    z-index: 100;
-    padding: 0.55rem 1rem;
-    background: var(--accent-color);
-    color: #1f2b23;
-    border-radius: 999px;
-    font-size: var(--font-size-small);
-    font-weight: 600;
-    box-shadow: var(--pixel-shadow);
-  }
+  border-bottom:1px solid rgba(167,192,128,.25);
 
-  .skip-link:focus {
-    left: 1rem;
-    top: 0.5rem;
-  }
+  background:rgba(32,39,44,.85);
+  backdrop-filter:blur(12px);
 
-  .home-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: var(--primary-text);
-    font-family: var(--font-display);
-    font-size: var(--font-size-small);
-    letter-spacing: 0.03em;
-    white-space: nowrap;
-  }
+  transition:.3s ease;
+}
 
-  .home-link:hover {
-    transform: translateY(-1px);
-    text-decoration: none;
-  }
 
-  .home-icon {
-    width: 0.95rem;
-    height: 0.95rem;
-    color: var(--accent-color);
-    flex-shrink: 0;
-  }
+#site-nav.hidden{
+  transform:translateY(-120%);
+}
 
-  .desktop-links {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0.95rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
 
-  .nav-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    color: var(--secondary-text);
-    font-weight: 600;
-    font-size: var(--font-size-small);
-    font-family: var(--font-family);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: var(--transition-smooth);
-  }
+nav{
+  max-width:var(--container-max);
 
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -0.22rem;
-    height: 1px;
-    background: rgba(181, 214, 145, 0.7);
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.22s ease;
-  }
+  margin:auto;
 
-  .nav-link:hover {
-    color: var(--primary-text);
-    transform: translateY(-1px);
-    text-decoration: none;
-  }
+  padding:.9rem var(--container-padding);
 
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    transform: scaleX(1);
-  }
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-  .nav-link.active {
-    color: var(--accent-strong);
-  }
 
-  .nav-icon-link svg {
-    width: 0.95rem;
-    height: 0.95rem;
-  }
 
-  .mobile-menu-toggle {
-    display: none;
-    margin-left: auto;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 0.65rem;
-    border: 1px solid rgba(181, 214, 145, 0.4);
-    background: rgba(41, 50, 55, 0.82);
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.25rem;
-    cursor: pointer;
-  }
+.desktop-links{
 
-  .mobile-menu-toggle span {
-    width: 1.05rem;
-    height: 2px;
-    border-radius: 4px;
-    background: #d6e8b1;
-  }
+  display:flex;
 
-  .mobile-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1098;
-    background: rgba(12, 17, 19, 0.58);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.22s ease;
-  }
+  justify-content:center;
+  align-items:center;
 
-  .mobile-overlay.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  gap:1.2rem;
 
-  .mobile-sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(82vw, 20rem);
-    height: 100dvh;
-    padding: 1rem 1rem 1.2rem;
-    z-index: 1099;
-    background:
-      linear-gradient(165deg, rgba(34, 43, 47, 0.98), rgba(28, 36, 40, 0.96)),
-      radial-gradient(circle at top right, rgba(181, 214, 145, 0.1), transparent 45%);
-    border-left: 1px solid rgba(167, 192, 128, 0.3);
-    box-shadow: -14px 0 28px rgba(8, 12, 13, 0.45);
-    transform: translateX(102%);
-    transition: transform 0.25s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
+  list-style:none;
 
-  .mobile-sidebar.open {
-    transform: translateX(0);
-  }
+  margin:0;
+  padding:0;
+}
 
-  .mobile-sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(167, 192, 128, 0.24);
-    padding-bottom: 0.8rem;
-  }
 
-  .mobile-sidebar-header p {
-    font-size: 0.86rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #c5d9a6;
-    font-family: var(--font-display);
-    font-weight: 700;
-  }
 
-  #mobile-close {
-    border: 1px solid rgba(181, 214, 145, 0.4);
-    border-radius: 0.5rem;
-    background: rgba(54, 65, 70, 0.58);
-    color: #deebbf;
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.2rem;
-    line-height: 1;
-    cursor: pointer;
-  }
+.nav-link{
 
-  .mobile-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.22rem;
-  }
+  color:var(--secondary-text);
 
-  .mobile-links .nav-link {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 0.55rem 0.45rem;
-    border-radius: 0.5rem;
-    border: 1px solid transparent;
-  }
+  text-decoration:none;
 
-  .mobile-links .nav-link::after {
-    display: none;
-  }
+  font-size:.85rem;
+  font-weight:600;
 
-  .mobile-links .nav-link:hover,
-  .mobile-links .nav-link.active {
-    border-color: rgba(181, 214, 145, 0.38);
-    background: rgba(167, 192, 128, 0.1);
-    transform: none;
-  }
+  transition:.2s;
+}
 
-  .mobile-github {
-    margin-top: auto;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    padding: 0.72rem 0.8rem;
-    border-radius: 0.65rem;
-    border: 1px solid rgba(181, 214, 145, 0.42);
-    color: #dcebbe;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-weight: 700;
-    background: rgba(167, 192, 128, 0.08);
-  }
 
-  :global(body.mobile-nav-open) {
-    overflow: hidden;
-  }
 
-  @media (max-width: 900px) {
-    nav {
-      grid-template-columns: 1fr auto;
-      gap: 0.8rem;
-      padding: 0.8rem var(--container-padding);
-    }
+.nav-link:hover{
 
-    .desktop-links {
-      display: none;
-    }
+  color:var(--primary-text);
 
-    .mobile-menu-toggle {
-      display: inline-flex;
-    }
+}
 
-    .home-link {
-      font-size: var(--font-size-xs);
-    }
-  }
+
+
+.mobile-menu-toggle{
+
+  display:none;
+
+  margin-left:auto;
+
+  width:2.4rem;
+  height:2.4rem;
+
+  border:1px solid rgba(181,214,145,.4);
+
+  background:transparent;
+
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  gap:5px;
+
+}
+
+
+
+.mobile-menu-toggle span{
+
+  width:18px;
+  height:2px;
+
+  background:#d6e8b1;
+
+}
+
+
+
+#mobile-overlay{
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,.5);
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.2s;
+
+  z-index:1001;
+
+}
+
+
+
+#mobile-overlay.show{
+
+  opacity:1;
+  pointer-events:auto;
+
+}
+
+
+
+#mobile-sidebar{
+
+  position:fixed;
+
+  top:0;
+  right:0;
+
+  width:80%;
+  max-width:300px;
+
+  height:100vh;
+
+  padding:2rem;
+
+  background:#20282c;
+
+  transform:translateX(100%);
+
+  transition:.3s;
+
+  z-index:1002;
+
+}
+
+
+
+#mobile-sidebar.open{
+
+  transform:translateX(0);
+
+}
+
+
+
+#mobile-sidebar ul{
+
+  list-style:none;
+
+  padding:2rem 0;
+
+}
+
+
+
+#mobile-sidebar li{
+
+  margin:1rem 0;
+
+}
+
+
+
+#mobile-sidebar a{
+
+  color:var(--primary-text);
+
+  text-decoration:none;
+
+}
+
+
+
+#mobile-close{
+
+  float:right;
+
+  border:0;
+
+  background:none;
+
+  color:white;
+
+  font-size:2rem;
+
+}
+
+
+
+.skip-link{
+
+  position:absolute;
+  left:-999px;
+
+}
+
+
+
+@media(max-width:900px){
+
+.desktop-links{
+  display:none;
+}
+
+
+.mobile-menu-toggle{
+
+  display:flex;
+
+}
+
+}
+
 </style>
