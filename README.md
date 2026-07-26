@@ -106,4 +106,4 @@ Aarav Gupta
 
 - GitHub: @Aarav2709
 - LinkedIn: aarav2709
-- Email: tribejustice35@gmail.com
+- Email: aaravgupta2709@proton.me
