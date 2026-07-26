@@ -59,7 +59,6 @@
       opacity 0.22s ease,
       border-color 0.2s ease,
       background-color 0.2s ease,
-      transform 0.14s cubic-bezier(0.22, 1, 0.36, 1);
     opacity: 0;
     box-shadow: inset 0 0 0 1px rgba(233, 236, 210, 0.08);
     mix-blend-mode: exclusion;
@@ -105,7 +104,10 @@
 <script>
   const cursor = document.getElementById("custom-cursor");
   const follower = document.getElementById("cursor-follower");
-  const canUseCursor = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  const canUseCursor = window.matchMedia(
+    "(hover: hover) and (pointer: fine)"
+  ).matches;
 
   if (!canUseCursor || !cursor || !follower) {
     cursor?.remove();
@@ -113,40 +115,63 @@
   } else {
     document.documentElement.classList.add("has-fancy-cursor");
 
-    let isVisible = false;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let followerX = 0;
+    let followerY = 0;
+
+    let visible = false;
 
     const interactiveSelector =
       "a, button, [role='button'], input, textarea, select, summary, label[for]";
 
-    const setActive = (value: boolean) => {
-      cursor.classList.toggle("active", value);
-      follower.classList.toggle("active", value);
+    const animate = () => {
+      followerX += (mouseX - followerX) * 0.15;
+      followerY += (mouseY - followerY) * 0.15;
+
+      cursor.style.transform =
+        `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+
+      follower.style.transform =
+        `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+
+      requestAnimationFrame(animate);
     };
 
     const reveal = () => {
-      if (isVisible) {
-        return;
-      }
-      isVisible = true;
+      if (visible) return;
+
+      visible = true;
       cursor.classList.add("visible");
       follower.classList.add("visible");
     };
 
-    const onMove = (event: PointerEvent) => {
-      const x = event.clientX;
-      const y = event.clientY;
-      const transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-      cursor.style.transform = transform;
-      follower.style.transform = transform;
-      reveal();
-    };
+    document.addEventListener(
+      "pointermove",
+      (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
 
-    document.addEventListener("pointermove", onMove, { passive: true });
+        reveal();
+      },
+      { passive: true }
+    );
 
-    document.addEventListener("pointerdown", (event: PointerEvent) => {
-      if (event.button !== 0) {
-        return;
-      }
+    document.addEventListener("mouseover", (event) => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) return;
+
+      const active = Boolean(
+        target.closest(interactiveSelector)
+      );
+
+      cursor.classList.toggle("active", active);
+      follower.classList.toggle("active", active);
+    });
+
+    document.addEventListener("pointerdown", () => {
       cursor.classList.add("pressed");
       follower.classList.add("pressed");
     });
@@ -156,24 +181,24 @@
       follower.classList.remove("pressed");
     });
 
-    document.addEventListener("mouseover", (event: MouseEvent) => {
-      const target = event.target;
-      if (!(target instanceof Element)) {
-        return;
-      }
-      setActive(Boolean(target.closest(interactiveSelector)));
+    window.addEventListener("mouseout", (event) => {
+      if (event.relatedTarget) return;
+
+      cursor.classList.remove(
+        "visible",
+        "active",
+        "pressed"
+      );
+
+      follower.classList.remove(
+        "visible",
+        "active",
+        "pressed"
+      );
+
+      visible = false;
     });
 
-    window.addEventListener("mouseout", (event: MouseEvent) => {
-      if (event.relatedTarget) {
-        return;
-      }
-      cursor.classList.remove("visible", "active", "pressed");
-      follower.classList.remove("visible", "active", "pressed");
-      isVisible = false;
-    });
-
-    window.addEventListener("focus", reveal);
+    animate();
   }
-
 </script>
