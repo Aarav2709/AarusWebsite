@@ -77,7 +77,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot />
 
     <script>
-      // Force dark theme globally and ignore prior stored preferences.
+      import "../scripts/smoothScroll";
       document.documentElement.setAttribute("data-theme", "dark");
       try {
         localStorage.setItem("theme", "dark");

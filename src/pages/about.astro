@@ -1,66 +1,187 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SectionHeader from "../components/SectionHeader.astro";
 ---
 
 <Layout title="About | Aarav Gupta">
-  <main id="main-content" class="page">
-    <section class="about">
-      <SectionHeader title="About" />
 
-      <div class="content">
-        <p>
-          Hey, I'm Aarav. I like building things with code, whether that's
-          websites, games, tools, or random ideas that I want to bring to life.
-        </p>
+<main id="main-content" class="page">
 
-        <p>
-          I enjoy exploring different parts of development, from making
-          interfaces look good to writing the systems that power them.
-        </p>
+<section class="about">
 
-        <p>
-          Things I work with:
-        </p>
+<div class="content">
 
-        <ul>
-          <li>Go</li>
-          <li>TypeScript</li>
-          <li>Python</li>
-          <li>Lua</li>
-          <li>Astro</li>
-          <li>Game Development</li>
-        </ul>
-      </div>
-    </section>
-  </main>
+<h1>
+  About me
+</h1>
+
+
+<p>
+  Hey, I'm Aarav. I'm a 15 year old developer who loves creating things with
+  code.
+</p>
+
+<p>
+  I have always been curious about how things work. Whether it is software,
+  computers, games, or even aircraft and space, I enjoy understanding the
+  little details behind the things around me.
+</p>
+
+
+<h2>
+  How it started
+</h2>
+
+<p>
+  My interest in computers started when I was around 5 years old. My uncle
+  introduced me to computers and showed me the basics of Linux and how
+  computers worked. I was fascinated by the fact that a machine could be
+  controlled, customized, and used to create almost anything.
+</p>
+
+<p>
+  A few years later, when I was 9, I started programming with Scratch.
+  What started as making simple animations and small projects slowly became
+  something much bigger. I spent a lot of time experimenting, learning, and
+  trying to create things that were actually fun to use.
+</p>
+
+
+<h2>
+  From games to software
+</h2>
+
+<p>
+  After Scratch started feeling limiting, I started exploring game
+  development. I got into Roblox Studio and began learning how games were
+  made, from designing environments to writing scripts and creating complete
+  experiences.
+</p>
+
+<p>
+  Game development taught me a lot about creativity, patience, and problem
+  solving. It showed me that programming was not just about writing code,
+  but about turning ideas into something other people can interact with.
+</p>
+
+<p>
+  Later, I started exploring programming outside of games. I learned Python,
+  started sharing my work on GitHub, and moved into web development. Since
+  then, I have enjoyed building websites, experimenting with new
+  technologies, and creating projects that solve problems or simply exist
+  because I wanted to make them.
+</p>
+
+
+<h2>
+  What I build
+</h2>
+
+<p>
+  I enjoy building things across different areas. Most of my projects are
+  around web development, game development, and experiments where I get to
+  learn something new.
+</p>
+
+<p>
+  I like researching before starting projects, understanding how things work,
+  and then putting my own ideas into them. The process of learning something
+  and then creating something with it is probably my favourite part of
+  programming.
+</p>
+
+
+<h2>
+  Outside of coding
+</h2>
+
+<p>
+  Programming is a huge part of my life, but I have plenty of other interests
+  too.
+</p>
+
+<p>
+  I am a huge aviation and astrophysics nerd. I can spend hours reading about
+  aircraft, space, and everything happening beyond our planet. I also enjoy
+  reading books, especially science fiction and fiction.
+</p>
+
+<p>
+  When I am not coding, I am usually solving cubes, improving my typing speed,
+  or falling into random rabbit holes about technology, science, and how
+  things work.
+</p>
+
+
+<p>
+  I build things because I genuinely enjoy it. Learning something new is
+  exciting, but taking that knowledge and creating something of my own is
+  even better.
+</p>
+
+
+</div>
+
+</section>
+
+</main>
+
 </Layout>
 
+
 <style>
+
 .page {
-  max-width: var(--container-max);
-  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
   padding: 8rem var(--container-padding) 4rem;
 }
 
+
 .content {
-  margin-top: 2rem;
-  max-width: 42rem;
+  max-width: 52rem;
+  width: 100%;
+  text-align: center;
 }
+
+
+h1 {
+  font-size: clamp(3rem, 7vw, 5rem);
+  color: var(--accent-color);
+  margin-bottom: 3rem;
+}
+
+
+h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 1.2rem;
+  color: var(--primary-text);
+  font-size: var(--section-size);
+}
+
 
 p {
   color: var(--secondary-text);
   font-size: var(--font-size-large);
-  margin-bottom: 1.2rem;
+  line-height: 1.9;
+  margin-bottom: 1.4rem;
 }
 
-ul {
-  margin-top: 1rem;
-  padding-left: 1.2rem;
-  color: var(--primary-text);
+
+@media(max-width:768px){
+
+  .page {
+    padding-top:6rem;
+  }
+
+  .content {
+    text-align:left;
+  }
+
+  h1 {
+    text-align:center;
+  }
+
 }
 
-li {
-  margin: 0.4rem 0;
-}
 </style>
