@@ -2,56 +2,79 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { getCollection } from "astro:content";
+import { getAllProjectStars } from "../utils/github";
 
 const projects = await getCollection("projects");
+
+const projectsWithStars = await getAllProjectStars(projects);
+
+const sortedProjects = projectsWithStars.sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 
 <Layout title="Projects | Aarav Gupta">
-  <main class="projects-page">
-    <section class="projects">
-      <h1>Projects</h1>
 
-      <div class="project-list">
-        {
-          projects.map((project, index) => (
-            <ProjectCard
-              title={project.data.title}
-              description={project.data.description}
-              tech={project.data.tech}
-              github={project.data.github}
-              live={project.data.live}
-              previewImage={project.data.previewImage}
-              previewAlt={project.data.previewAlt}
-              stars={project.data.stars}
-              index={index}
-            />
-          ))
-        }
-      </div>
-    </section>
-  </main>
+<main class="projects-page">
+
+<section class="projects">
+
+<h1>Projects</h1>
+
+<div class="project-list">
+
+{
+  sortedProjects.map((project, index) => (
+
+    <ProjectCard
+      title={project.data.title}
+      description={project.data.description}
+      tech={project.data.tech}
+      github={project.data.github}
+      live={project.data.live}
+      previewImage={project.data.previewImage}
+      previewAlt={project.data.previewAlt}
+      stars={project.stars}
+      index={index}
+    />
+
+  ))
+}
+
+</div>
+
+</section>
+
+</main>
+
 </Layout>
 
+
 <style>
+
 .projects-page {
-  min-height: 100vh;
-  padding-top: 8rem;
+  min-height:100vh;
+  padding-top:8rem;
 }
+
 
 .projects {
-  max-width: var(--container-max);
-  margin: auto;
-  padding: 0 var(--container-padding);
+  max-width:var(--container-max);
+  margin:auto;
+  padding:0 var(--container-padding);
 }
+
 
 .projects h1 {
-  color: var(--accent-color);
-  font-size: var(--section-size);
-  margin-bottom: 2rem;
+  color:var(--accent-color);
+  font-size:var(--section-size);
+  margin-bottom:2rem;
 }
 
+
 .project-list {
-  display: flex;
-  flex-direction: column;
+  display:flex;
+  flex-direction:column;
 }
+
 </style>

@@ -19,246 +19,277 @@ const {
   live,
   previewImage,
   previewAlt,
-  stars,
+  stars = 0,
   index,
 } = Astro.props;
 
-const resolvedPreview = previewImage;
-const resolvedPreviewAlt = previewAlt ?? `${title} screenshot`;
+const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
 ---
 
-<div class="project slide-up" style={`animation-delay: ${index * 0.08}s`}>
+<article
+  class="project slide-up"
+  style={`animation-delay: ${index * 0.08}s`}
+>
+
+  {
+    previewImage && (
+      <div class="preview">
+        <img src={previewImage} alt={resolvedPreviewAlt} />
+      </div>
+    )
+  }
+
+
   <div class="project-content">
-    <div class="project-info">
-      <div class="project-meta">
-        <span class="project-tech">{tech.join(" / ")}</span>
-      </div>
 
-      <h3>{title}</h3>
-
-      <p class="project-description">{description}</p>
-
-      <div class="project-links">
-        {
-          github && (
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="project-link"
-            >
-              source
-              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
-              </svg>
-            </a>
-          )
-        }
-        {
-          live && (
-            <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="project-link"
-            >
-              live
-              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
-              </svg>
-            </a>
-          )
-        }
-        {
-          github && (
-            <span
-              class="star-badge"
-              aria-label={`${stars ?? 0} stars`}
-              data-github={github}
-              data-stars={stars ?? 0}
-              data-role="star-badge"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 .587l3.668 7.431L23.4 9.75l-5.7 5.556L19.335 24 12 19.897 4.665 24l1.634-8.694L.6 9.75l7.732-1.732z" />
-              </svg>
-              <span class="star-count">{stars ?? 0}</span>
-            </span>
-          )
-        }
-        {
-          resolvedPreview && (
-            <button
-              type="button"
-              class="project-link preview-trigger"
-              data-preview-open
-              data-preview-src={resolvedPreview}
-              data-preview-alt={resolvedPreviewAlt}
-              data-preview-title={`${title} preview`}
-              aria-label={`Open preview for ${title}`}
-            >
-              preview
-            </button>
-          )
-        }
-      </div>
+    <div class="project-tech">
+      {tech.join(" • ")}
     </div>
+
+
+    <h2>
+      {title}
+    </h2>
+
+
+    <p>
+      {description}
+    </p>
+
+
+    <div class="project-links">
+
+      {
+        github && (
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            source ↗
+          </a>
+        )
+      }
+
+
+      {
+        live && (
+          <a
+            href={live}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            live ↗
+          </a>
+        )
+      }
+
+
+      {
+        github && (
+          <span class="stars">
+            ★ {stars}
+          </span>
+        )
+      }
+
+
+      {
+        previewImage && (
+          <button
+            type="button"
+            class="preview-button"
+            data-preview-open
+            data-preview-src={previewImage}
+            data-preview-alt={resolvedPreviewAlt}
+            data-preview-title={`${title} preview`}
+          >
+            preview
+          </button>
+        )
+      }
+
+    </div>
+
   </div>
-</div>
+
+</article>
+
 
 <style>
+
+.project {
+
+  padding: 2.5rem 0;
+
+  border-bottom: 1px solid var(--border-color);
+
+  transition: var(--transition-smooth);
+
+}
+
+
+.project:hover {
+
+  transform:translateX(8px);
+
+}
+
+
+
+.preview {
+
+  margin-bottom:1.5rem;
+
+}
+
+
+
+.preview img {
+
+  width:100%;
+
+  max-height:350px;
+
+  object-fit:cover;
+
+  border-radius:1rem;
+
+}
+
+
+
+.project-content {
+
+  max-width:50rem;
+
+}
+
+
+
+.project-tech {
+
+  font-family:var(--font-mono);
+
+  font-size:.75rem;
+
+  text-transform:uppercase;
+
+  letter-spacing:.12em;
+
+  color:var(--secondary-text);
+
+  margin-bottom:.9rem;
+
+}
+
+
+
+h2 {
+
+  margin:0;
+
+  color:var(--accent-color);
+
+  font-size:clamp(1.7rem,3vw,2.3rem);
+
+  font-weight:600;
+
+  letter-spacing:-0.03em;
+
+  line-height:1.1;
+
+}
+
+
+
+p {
+
+  margin-top:1rem;
+
+  color:var(--secondary-text);
+
+  font-size:1.05rem;
+
+  line-height:1.75;
+
+  max-width:46rem;
+
+}
+
+
+
+.project-links {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:1rem;
+
+  margin-top:1.5rem;
+
+}
+
+
+
+.project-links a,
+.preview-button {
+
+  color:var(--primary-text);
+
+  font-size:.9rem;
+
+  text-decoration:none;
+
+  background:none;
+
+  border:none;
+
+  padding:0;
+
+  cursor:pointer;
+
+  font-family:var(--font-family);
+
+}
+
+
+
+.project-links a:hover,
+.preview-button:hover {
+
+  color:var(--accent-color);
+
+}
+
+
+
+.stars {
+
+  color:var(--secondary-text);
+
+  font-size:.9rem;
+
+}
+
+
+
+@media(max-width:768px){
+
   .project {
-    padding: 0;
-    border-top: 1px dashed rgba(167, 192, 128, 0.28);
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-    margin-bottom: 0.35rem;
-    position: relative;
-    transition: var(--transition-smooth);
-    overflow: visible;
+
+    padding:2rem 0;
+
   }
 
-  .project:hover {
-    transform: translateX(2px);
-    border-top-color: rgba(181, 214, 145, 0.6);
-  }
-
-  .project-content {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    align-items: center;
-    padding: 0.85rem 0;
-    text-align: left;
-  }
-
-  .project-info {
-    padding: 0;
-  }
-
-  .project-info h3 {
-    font-size: 1.35rem;
-    font-weight: 400;
-    margin: 0 0 0.3rem 0;
-    color: #d1ddab;
-    letter-spacing: 0.03em;
-    line-height: 1.2;
-    font-family: var(--font-display);
-  }
-
-  .project-meta {
-    display: flex;
-    gap: 0.4rem;
-    margin-bottom: 0.45rem;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .project-tech {
-    background: none;
-    color: #98ab89;
-    padding: 0;
-    font-size: var(--font-size-xs);
-    font-weight: 500;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    border-radius: 0;
-    border: none;
-    font-family: var(--font-mono);
-    position: relative;
-    padding-left: 0.75rem;
-  }
-
-  .project-tech::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0.35rem;
-    height: 0.08rem;
-    background: rgba(167, 192, 128, 0.62);
-  }
-
-  .project-description {
-    color: var(--tertiary-text);
-    line-height: 1.65;
-    margin-bottom: 0.82rem;
-    font-size: var(--font-size-small);
-    font-weight: 500;
-    max-width: 44rem;
-  }
 
   .project-links {
-    display: flex;
-    gap: 0.42rem;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+
+    flex-wrap:wrap;
+
   }
 
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    color: #d2ddb0;
-    text-decoration: none !important;
-    font-size: var(--font-size-xs);
-    font-weight: 400;
-    font-family: var(--font-display);
-    letter-spacing: 0.05em;
-    text-transform: lowercase;
-    padding: 0;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px dashed rgba(167, 192, 128, 0.45);
-    background: none;
-    transition: var(--transition-smooth);
-  }
+}
 
-  button.project-link {
-    appearance: none;
-    cursor: pointer;
-    line-height: 1;
-  }
-
-  .project-link:hover {
-    color: #e1f0bc;
-    border-bottom-color: rgba(181, 214, 145, 0.72);
-    text-decoration: none !important;
-    opacity: 1;
-    transform: translateY(-1px);
-  }
-
-  .star-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    color: #b6c79d;
-    font-size: var(--font-size-xs);
-    font-weight: 500;
-    font-family: var(--font-mono);
-    padding: 0;
-    border-radius: 0;
-    border: none;
-    background: none;
-  }
-
-  .star-badge svg {
-    width: 0.65rem;
-    height: 0.65rem;
-    fill: #d8e8b2;
-  }
-
-  @media (max-width: 768px) {
-    .project {
-      margin-bottom: 0.5rem;
-    }
-
-    .project-content {
-      padding: 0.8rem 0;
-    }
-  }
 </style>
