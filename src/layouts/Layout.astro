@@ -103,7 +103,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         }
 
         elements.forEach((element, index) => {
-          element.style.transitionDelay = `${index * 80}ms`;
+          (element as HTMLElement).style.transitionDelay = `${index * 80}ms`;
         });
 
         const observer = new IntersectionObserver(
