@@ -6,7 +6,6 @@ const projectsCollection = defineCollection({
     pattern: "**/*.md",
     base: "src/content/projects",
   }),
-
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -26,11 +25,11 @@ const blogCollection = defineCollection({
     pattern: "**/*.md",
     base: "src/content/blog",
   }),
-
   schema: z.object({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
+    tags: z.array(z.string()).optional(),
   }),
 });
 

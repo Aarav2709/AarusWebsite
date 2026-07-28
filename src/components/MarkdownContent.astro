@@ -1,0 +1,88 @@
+<div class="markdown">
+  <slot />
+</div>
+
+<style>
+.markdown {
+  max-width:48rem;
+  margin:0 auto;
+  color:var(--secondary-text);
+  font-size:1.08rem;
+  line-height:1.9;
+}
+
+.markdown p {
+  margin:1.5rem 0;
+}
+
+.markdown h2 {
+  margin-top:4rem;
+  margin-bottom:1rem;
+  color:var(--primary-text);
+  font-family:var(--font-display);
+  font-size:2.2rem;
+  letter-spacing:-0.04em;
+}
+
+.markdown h3 {
+  margin-top:3rem;
+  margin-bottom:1rem;
+  color:var(--primary-text);
+  font-size:1.5rem;
+}
+
+.markdown strong {
+  color:var(--primary-text);
+  font-weight:700;
+}
+
+.markdown ul,
+.markdown ol {
+  margin:1.5rem 0;
+  padding-left:2rem;
+}
+
+.markdown li {
+  margin:.5rem 0;
+}
+
+.markdown blockquote {
+  margin:2rem 0;
+  padding:1rem 1.5rem;
+  border-left:3px solid var(--accent-color);
+  color:var(--secondary-text);
+}
+
+.markdown code {
+  font-family:var(--font-mono);
+  background:rgba(167,192,128,.12);
+  padding:.2rem .45rem;
+  border-radius:.4rem;
+}
+
+.markdown pre {
+  margin:2rem 0;
+  padding:1.5rem;
+  overflow-x:auto;
+  background:rgba(0,0,0,.3);
+  border:1px solid var(--border-color);
+  border-radius:1rem;
+}
+
+.markdown pre code {
+  padding:0;
+  background:none;
+}
+
+.markdown img {
+  width:100%;
+  margin:3rem 0;
+  border-radius:1rem;
+}
+
+@media(max-width:768px){
+  .markdown {
+    font-size:1rem;
+  }
+}
+</style>

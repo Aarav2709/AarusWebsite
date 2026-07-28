@@ -1,5 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import BlogHeader from "../../components/BlogHeader.astro";
+import BlogMeta from "../../components/BlogMeta.astro";
+import MarkdownContent from "../../components/MarkdownContent.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -20,39 +23,35 @@ const { Content } = await render(post);
 ---
 
 <Layout title={`${post.data.title} | AarusPortfolio`}>
-  <main class="page">
+  <main id="main-content" class="page">
     <article class="article">
-      <header class="header reveal">
-        <h1>{post.data.title}</h1>
 
-        <p class="description">
-          {post.data.description}
+      <BlogHeader
+        title={post.data.title}
+        description={post.data.description}
+      />
+
+      <BlogMeta
+        date={post.data.date}
+        tags={post.data.tags}
+      />
+
+      <div class="divider"></div>
+
+      <MarkdownContent>
+        <Content />
+      </MarkdownContent>
+
+      <footer class="article-footer">
+        <p>
+          Thanks for reading.
         </p>
 
-        <div class="metadata">
-          {
-            post.data.date && (
-              <time>
-                {post.data.date.toDateString()}
-              </time>
-            )
-          }
+        <a href="/blog">
+          ← Back to all posts
+        </a>
+      </footer>
 
-          {
-            post.data.tags?.map((tag) => (
-              <span>
-                #{tag}
-              </span>
-            ))
-          }
-        </div>
-      </header>
-
-      <div class="separator"></div>
-
-      <div class="content reveal">
-        <Content />
-      </div>
     </article>
   </main>
 </Layout>
@@ -60,157 +59,40 @@ const { Content } = await render(post);
 <style>
 .page {
   min-height:100vh;
-  padding:7rem var(--container-padding) 6rem;
+  padding:8rem var(--container-padding) 6rem;
 }
 
 .article {
-  max-width:52rem;
+  max-width:62rem;
   margin:0 auto;
 }
 
-.header {
-  margin-bottom:3rem;
-}
-
-h1 {
-  margin:0;
-  color:var(--accent-color);
-  font-family:var(--font-display);
-  font-size:clamp(3.5rem,8vw,6rem);
-  line-height:.95;
-  letter-spacing:-0.07em;
-}
-
-.description {
-  margin-top:1.5rem;
-  color:var(--secondary-text);
-  font-size:1.25rem;
-  line-height:1.7;
-}
-
-.metadata {
-  display:flex;
-  align-items:center;
-  gap:.7rem;
-  flex-wrap:wrap;
-  margin-top:2rem;
-}
-
-.metadata time,
-.metadata span {
-  padding:.45rem .8rem;
-  border-radius:.7rem;
-  border:1px solid var(--border-color);
-  color:var(--secondary-text);
-  font-size:.9rem;
-  background:rgba(167,192,128,.05);
-}
-
-.separator {
+.divider {
   height:1px;
   background:var(--border-color);
-  margin-bottom:3rem;
+  margin:4rem 0;
 }
 
-.content {
-  font-size:1.08rem;
-  line-height:1.9;
-}
-
-.content p {
-  margin:1.5rem 0;
-  color:var(--secondary-text);
-}
-
-.content h2 {
-  margin-top:4rem;
-  margin-bottom:1rem;
-  color:var(--primary-text);
-  font-size:2.2rem;
-  letter-spacing:-0.04em;
-}
-
-.content h3 {
-  margin-top:3rem;
-  margin-bottom:1rem;
-  color:var(--primary-text);
-  font-size:1.5rem;
-}
-
-.content strong {
-  color:var(--primary-text);
-}
-
-.content ul,
-.content ol {
-  margin:1.5rem 0;
-  padding-left:2rem;
-  color:var(--secondary-text);
-}
-
-.content li {
-  margin:.5rem 0;
-}
-
-.content blockquote {
-  margin:2rem 0;
-  padding:1rem 1.5rem;
-  border-left:3px solid var(--accent-color);
-  background:rgba(167,192,128,.08);
-  border-radius:.5rem;
-}
-
-.content a {
-  color:var(--accent-color);
-  text-decoration:underline;
-  text-underline-offset:3px;
-}
-
-.content code {
-  padding:.2rem .45rem;
-  border-radius:.4rem;
-  background:rgba(167,192,128,.12);
-  font-family:var(--font-mono);
-}
-
-.content pre {
-  margin:2.5rem 0;
-  padding:1.5rem;
-  overflow-x:auto;
-  border:1px solid var(--border-color);
-  border-radius:1rem;
-  background:rgba(0,0,0,.25);
-}
-
-.content pre code {
-  padding:0;
-  background:none;
-}
-
-.content img {
-  width:100%;
-  margin:3rem 0;
-  border-radius:1rem;
-  border:1px solid var(--border-color);
-}
-
-.content hr {
-  margin:3rem 0;
-  border:none;
+.article-footer {
+  margin-top:5rem;
+  padding-top:2rem;
   border-top:1px solid var(--border-color);
+  text-align:center;
 }
 
-@media(max-width:768px){
-  .page {
-    padding-top:6rem;
-  }
+.article-footer p {
+  color:var(--secondary-text);
+  margin:0;
+}
 
-  h1 {
-    font-size:clamp(2.8rem,12vw,4rem);
-  }
+.article-footer a {
+  display:inline-block;
+  margin-top:1rem;
+  color:var(--accent-color);
+  text-decoration:none;
+}
 
-  .description {
-    font-size:1.1rem;
-  }
+.article-footer a:hover {
+  color:var(--primary-text);
 }
 </style>

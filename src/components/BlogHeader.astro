@@ -1,0 +1,68 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date?: Date;
+}
+
+const { title, description, date } = Astro.props;
+---
+
+<header class="blog-header reveal">
+  <h1>{title}</h1>
+
+  <p class="description">
+    {description}
+  </p>
+
+  {
+    date && (
+      <time>
+        {date.toDateString()}
+      </time>
+    )
+  }
+</header>
+
+<style>
+.blog-header {
+  text-align:center;
+  margin-bottom:4rem;
+}
+
+h1 {
+  color:var(--accent-color);
+  font-family:var(--font-display);
+  font-size:clamp(3rem,7vw,5.5rem);
+  font-weight:700;
+  letter-spacing:-0.06em;
+  line-height:1;
+  margin:0;
+}
+
+.description {
+  max-width:42rem;
+  margin:1.5rem auto 0;
+  color:var(--secondary-text);
+  font-size:1.2rem;
+  line-height:1.7;
+}
+
+time {
+  display:block;
+  margin-top:1.5rem;
+  color:var(--secondary-text);
+  font-family:var(--font-family);
+  font-size:.95rem;
+}
+
+@media(max-width:768px){
+  h1 {
+    font-size:clamp(2.5rem,12vw,4rem);
+  }
+
+  .description {
+    font-size:1rem;
+  }
+}
+</style>
