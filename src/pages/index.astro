@@ -5,17 +5,17 @@ import Layout from "../layouts/Layout.astro";
 <Layout>
   <main id="main-content">
     <section class="hero">
-      <h1>
+      <h1 class="hero-title">
         Aarav<br />
         Gupta
       </h1>
 
-      <p>
+      <p class="hero-subtitle">
         15 year old developer building software, games, and things I find
         interesting.
       </p>
 
-      <div class="links">
+      <div class="links hero-links">
         <a href="mailto:aaravgupta2709@proton.me">
           Mail
         </a>
@@ -42,26 +42,42 @@ import Layout from "../layouts/Layout.astro";
   text-align: center;
 }
 
-.hero h1 {
+.hero-title {
   font-size: clamp(5rem, 12vw, 9rem);
   line-height: 0.85;
   margin: 0;
   font-family: var(--font-display);
   color: var(--accent-color);
+
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(8px);
+
+  animation: heroEnter 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.hero p {
+.hero-subtitle {
   margin-top: 2rem;
   font-size: 1.1rem;
   color: var(--secondary-text);
   max-width: 35rem;
   line-height: 1.7;
+
+  opacity: 0;
+  transform: translateY(25px);
+
+  animation: heroFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
 }
 
 .links {
   display: flex;
   gap: 1.2rem;
   margin-top: 1.5rem;
+
+  opacity: 0;
+  transform: translateY(20px);
+
+  animation: heroFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
 }
 
 .links a {
@@ -72,6 +88,44 @@ import Layout from "../layouts/Layout.astro";
 
 .links a:hover {
   color: var(--primary-text);
+  transform: translateY(-2px);
+}
+
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title,
+  .hero-subtitle,
+  .hero-links {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }
 
 @media (max-width: 768px) {

@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = "AarusPortfolio",
-  description = "15 year old full stack web dev building clean web apps and developer tools with Go, TypeScript, Lua, and Python.",
+  description = "15 year old developer building software, games, and web experiences with Go, TypeScript, Lua, and Python.",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,29 +21,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
 
     <title>{title}</title>
+
     <meta name="description" content={description} />
     <meta name="author" content="Aarav Gupta" />
     <meta
       name="keywords"
-      content="Aarav Gupta, developer, Go, TypeScript, Python, Lua, developer tools, open source"
+      content="Aarav Gupta, developer, Go, TypeScript, Python, Lua, open source"
     />
+
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
     <meta name="generator" content={Astro.generator} />
+
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="AarusPortfolio" />
-    <meta property="og:locale" content="en_US" />
+
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:creator" content="@Aarav2709" />
+
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -55,65 +60,85 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           "https://github.com/Aarav2709",
           "https://linkedin.com/in/aarav2709",
         ],
-        jobTitle: "Full Stack Web Developer",
-        description: description,
+        jobTitle: "Developer",
+        description,
         knowsAbout: [
           "Go",
           "TypeScript",
           "Python",
           "Lua",
-          "React",
+          "Astro",
           "Game Development",
-          "Developer Tools",
-          "Systems Programming",
+          "Open Source",
         ],
       })}
     />
   </head>
+
   <body>
     <CustomCursor />
+
     <NavBar />
 
     <slot />
 
     <script>
       import "../scripts/smoothScroll";
+
       document.documentElement.setAttribute("data-theme", "dark");
+
       try {
         localStorage.setItem("theme", "dark");
       } catch {}
 
-      if ("IntersectionObserver" in window) {
+      function initReveal() {
+        const elements = document.querySelectorAll(".reveal");
+
+        if (!("IntersectionObserver" in window)) {
+          elements.forEach((element) => {
+            element.classList.add("visible");
+          });
+
+          return;
+        }
+
+        elements.forEach((element, index) => {
+          element.style.transitionDelay = `${index * 80}ms`;
+        });
+
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
               }
             });
           },
-          { threshold: 0.1 },
+          {
+            threshold: 0.15,
+          },
         );
 
-        document.addEventListener("DOMContentLoaded", () => {
-          document.querySelectorAll(".fade-in, .slide-up").forEach((el) => {
-            observer.observe(el);
-          });
+        elements.forEach((element) => {
+          observer.observe(element);
         });
       }
 
-      // Console easter egg
+      initReveal();
+
+      document.addEventListener("astro:page-load", () => {
+        initReveal();
+      });
+
       console.log(
         "%c> aarav.init()",
-        "color: #fff; font-family: monospace; font-size: 14px; font-weight: bold;"
+        "color: #fff; font-family: monospace; font-size: 14px; font-weight: bold;",
       );
+
       console.log(
-        "%c15 yo builder. Full stack web dev. Open source enjoyer :D <3",
-        "color: #888; font-family: monospace; font-size: 11px;"
-      );
-      console.log(
-        "%c\nStack: Go, TypeScript, Python, Lua, React, Astro.\nSystems: Linux (Arch), Neovim, tmux.\n\nLooking at the source? Good instinct.\nhttps://github.com/Aarav2709/AarusPortfolio",
-        "color: #666; font-family: monospace; font-size: 11px;"
+        "%c15 yo builder. Full stack web dev. Open source enjoyer :D",
+        "color: #888; font-family: monospace; font-size: 11px;",
       );
     </script>
   </body>

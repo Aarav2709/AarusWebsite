@@ -26,7 +26,10 @@ const {
 const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
 ---
 
-<article class="project">
+<article
+  class="project reveal"
+  style={`transition-delay:${index * 80}ms`}
+>
   {previewImage && (
     <div class="preview">
       <img src={previewImage} alt={resolvedPreviewAlt} />
@@ -44,13 +47,21 @@ const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
 
     <div class="project-links">
       {github && (
-        <a href={github} target="_blank" rel="noopener noreferrer">
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           source ↗
         </a>
       )}
 
       {live && (
-        <a href={live} target="_blank" rel="noopener noreferrer">
+        <a
+          href={live}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           live ↗
         </a>
       )}
@@ -81,11 +92,17 @@ const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
 .project {
   padding: 3rem 0;
   border-bottom: 1px solid var(--border-color);
-  transition: transform 0.25s ease;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
 }
 
 .project:hover {
-  transform: translateX(6px);
+  border-color: var(--accent-color);
+}
+
+.project:hover .project-content {
+  transform: translateX(8px);
 }
 
 .preview {
@@ -100,9 +117,10 @@ const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
 }
 
 .project-content {
-  max-width: 55rem;
-  margin: 0 auto;
-  text-align: center;
+  max-width:55rem;
+  margin:0 auto;
+  text-align:center;
+  transition:transform .35s cubic-bezier(0.22,1,0.36,1);
 }
 
 .project-tech {
@@ -119,25 +137,23 @@ h2 {
   color: var(--primary-text);
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 500;
-  letter-spacing: -0.03em;
   line-height: 1.2;
 }
 
 p {
   margin: 1rem auto 0;
   color: var(--secondary-text);
-  font-size: 1rem;
   line-height: 1.7;
   max-width: 48rem;
 }
 
 .project-links {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:1rem;
-  margin-top:1.5rem;
-  flex-wrap:wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .project-links a,
@@ -147,9 +163,8 @@ p {
   text-decoration: none;
   background: none;
   border: none;
-  padding: 0;
   cursor: pointer;
-  font-family: var(--font-family);
+  transition: color 0.25s ease;
 }
 
 .project-links a:hover,
@@ -162,7 +177,7 @@ p {
   font-size: 0.9rem;
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .project {
     padding: 2rem 0;
   }

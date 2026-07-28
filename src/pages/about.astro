@@ -2,62 +2,63 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="About | Aarav Gupta">
+<Layout title="About | AarusPortfolio">
   <main id="main-content" class="page">
     <section class="about">
       <div class="content">
-        <h1>
+
+        <h1 class="reveal">
           About me
         </h1>
 
-        <p>
+        <p class="reveal">
           Hey, I'm Aarav. I'm a 15 year old developer who loves creating
           things with code.
         </p>
 
-        <p>
+        <p class="reveal">
           I have always been curious about how things work. Whether it is
           software, computers, games, aircraft, or space, I enjoy understanding
           the little details behind the things around me.
         </p>
 
-        <h2>
+        <h2 class="reveal">
           How it started
         </h2>
 
-        <p>
+        <p class="reveal">
           My interest in computers started when I was around 5 years old.
           My uncle introduced me to computers and showed me the basics of Linux
           and how computers worked. I was fascinated by the fact that a machine
           could be controlled, customized, and used to create almost anything.
         </p>
 
-        <p>
+        <p class="reveal">
           A few years later, when I was 9, I started programming with Scratch.
           What started as making simple animations and small projects slowly
           became something much bigger. I spent a lot of time experimenting,
           learning, and trying to create things that were actually fun to use.
         </p>
 
-        <h2>
+        <h2 class="reveal">
           From games to software
         </h2>
 
-        <p>
+        <p class="reveal">
           After Scratch started feeling limiting, I started exploring game
           development. I got into Roblox Studio and began learning how games
           were made, from designing environments to writing scripts and
           creating complete experiences.
         </p>
 
-        <p>
+        <p class="reveal">
           Game development taught me a lot about creativity, patience, and
           problem solving. It showed me that programming was not just about
           writing code, but about turning ideas into something other people
           can interact with.
         </p>
 
-        <p>
+        <p class="reveal">
           Later, I started exploring programming outside of games. I learned
           Python, started sharing my work on GitHub, and moved into web
           development. Since then, I have enjoyed building websites,
@@ -65,49 +66,50 @@ import Layout from "../layouts/Layout.astro";
           problems or simply exist because I wanted to make them.
         </p>
 
-        <h2>
+        <h2 class="reveal">
           What I build
         </h2>
 
-        <p>
+        <p class="reveal">
           I enjoy building things across different areas. Most of my projects
           are around web development, game development, and experiments where I
           get to learn something new.
         </p>
 
-        <p>
+        <p class="reveal">
           I like researching before starting projects, understanding how things
           work, and then putting my own ideas into them. The process of learning
           something and then creating something with it is probably my favourite
           part of programming.
         </p>
 
-        <h2>
+        <h2 class="reveal">
           Outside of coding
         </h2>
 
-        <p>
+        <p class="reveal">
           Programming is a huge part of my life, but I have plenty of other
           interests too.
         </p>
 
-        <p>
+        <p class="reveal">
           I am a huge aviation and astrophysics nerd. I can spend hours reading
           about aircraft, space, and everything happening beyond our planet. I
           also enjoy reading books, especially science fiction and fiction.
         </p>
 
-        <p>
+        <p class="reveal">
           When I am not coding, I am usually solving cubes, improving my typing
           speed, or falling into random rabbit holes about technology, science,
           and how things work.
         </p>
 
-        <p>
+        <p class="reveal">
           I build things because I genuinely enjoy it. Learning something new
           is exciting, but taking that knowledge and creating something of my
           own is even better.
         </p>
+
       </div>
     </section>
   </main>
@@ -145,6 +147,19 @@ p {
   font-size: var(--font-size-large);
   line-height: 1.9;
   margin-bottom: 1.4rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {
