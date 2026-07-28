@@ -1,8 +1,3 @@
-/**
- * Fetch GitHub repository stars at build time
- * This runs during the build process to avoid API rate limits
- */
-
 interface GitHubRepo {
   owner: string;
   repo: string;
@@ -175,15 +170,24 @@ export async function getGitHubContributions(username: string): Promise<GitHubCo
   }
 }
 
-export async function getAllProjectStars(projects: Array<{ data: { github?: string } }>) {
+export async function getAllProjectStars<
+  T extends { data: { github?: string } }
+>(projects: T[]) {
   const starsPromises = projects.map(async (project) => {
     if (!project.data.github) {
-      return { ...project, stars: 0 };
+      return {
+        ...project,
+        stars: 0,
+      };
     }
 
     const stars = await getGitHubStars(project.data.github);
-    return { ...project, stars };
+
+    return {
+      ...project,
+      stars,
+    };
   });
 
-  return await Promise.all(starsPromises);
+  return Promise.all(starsPromises);
 }

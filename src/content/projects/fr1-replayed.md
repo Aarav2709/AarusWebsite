@@ -1,6 +1,6 @@
 ---
 title: "Fun Run 1: Replayed"
-description: "The OG animal racing game is back again with revamped code, revived multiplayer systems, and modern platform support."
+description: "The FR1 Replayed Project, being led by Notedire, is a WIP, being recreated from the scratch all over again using Modern Tech, and Brand New Systems!"
 tech:
   - lua
   - solar2d

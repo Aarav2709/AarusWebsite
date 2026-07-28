@@ -11,24 +11,19 @@ const navLinks = [
 
 <header id="site-nav">
   <nav>
-
     <a href="#main-content" class="skip-link">
       Skip to Main Content
     </a>
 
-
     <ul class="desktop-links">
-      {
-        navLinks.map((link) => (
-          <li>
-            <a href={link.url} class="nav-link">
-              {link.name}
-            </a>
-          </li>
-        ))
-      }
+      {navLinks.map((link) => (
+        <li>
+          <a href={link.url} class="nav-link">
+            {link.name}
+          </a>
+        </li>
+      ))}
     </ul>
-
 
     <button
       id="mobile-menu-toggle"
@@ -40,35 +35,26 @@ const navLinks = [
       <span></span>
       <span></span>
     </button>
-
   </nav>
 </header>
 
-
 <div id="mobile-overlay"></div>
 
-
 <aside id="mobile-sidebar">
-
-  <button id="mobile-close">
+  <button id="mobile-close" aria-label="Close menu">
     ×
   </button>
 
-
   <ul>
-    {
-      navLinks.map((link) => (
-        <li>
-          <a href={link.url}>
-            {link.name}
-          </a>
-        </li>
-      ))
-    }
+    {navLinks.map((link) => (
+      <li>
+        <a href={link.url}>
+          {link.name}
+        </a>
+      </li>
+    ))}
   </ul>
-
 </aside>
-
 
 <script>
 const nav = document.querySelector("#site-nav");
@@ -77,312 +63,183 @@ const sidebar = document.querySelector("#mobile-sidebar");
 const overlay = document.querySelector("#mobile-overlay");
 const close = document.querySelector("#mobile-close");
 
+function setMenu(state: boolean) {
+  sidebar?.classList.toggle("open", state);
+  overlay?.classList.toggle("show", state);
+  toggle?.setAttribute("aria-expanded", String(state));
+}
 
-const setMenu = (state:boolean)=>{
-  sidebar?.classList.toggle("open",state);
-  overlay?.classList.toggle("show",state);
-  toggle?.setAttribute(
-    "aria-expanded",
-    String(state)
-  );
-};
+toggle?.addEventListener("click", () => {
+  setMenu(!sidebar?.classList.contains("open"));
+});
 
+close?.addEventListener("click", () => {
+  setMenu(false);
+});
 
-toggle?.addEventListener(
-  "click",
-  ()=>{
-    setMenu(!sidebar?.classList.contains("open"));
-  }
-);
+overlay?.addEventListener("click", () => {
+  setMenu(false);
+});
 
-
-close?.addEventListener(
-  "click",
-  ()=>{
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
     setMenu(false);
   }
-);
-
-
-overlay?.addEventListener(
-  "click",
-  ()=>{
-    setMenu(false);
-  }
-);
-
-
-document.addEventListener(
-  "keydown",
-  (e)=>{
-    if(e.key==="Escape"){
-      setMenu(false);
-    }
-  }
-);
-
+});
 
 let lastScroll = 0;
 
-
 window.addEventListener(
   "scroll",
-  ()=>{
+  () => {
     const current = window.scrollY;
 
-    if(current > lastScroll && current > 100){
+    if (current > lastScroll && current > 100) {
       nav?.classList.add("hidden");
-    }
-    else{
+    } else {
       nav?.classList.remove("hidden");
     }
 
-    lastScroll=current;
+    lastScroll = current;
   },
-  {passive:true}
+  { passive: true }
 );
 </script>
 
-
 <style>
-
-#site-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-
-  z-index:1000;
-
-  border-bottom:1px solid rgba(167,192,128,.25);
-
-  background:rgba(32,39,44,.85);
-  backdrop-filter:blur(12px);
-
-  transition:.3s ease;
+#site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(167, 192, 128, 0.25);
+  background: rgba(32, 39, 44, 0.85);
+  backdrop-filter: blur(12px);
+  transition: 0.3s ease;
 }
 
-
-#site-nav.hidden{
-  transform:translateY(-120%);
+#site-nav.hidden {
+  transform: translateY(-120%);
 }
 
-
-nav{
-  max-width:var(--container-max);
-
-  margin:auto;
-
-  padding:.9rem var(--container-padding);
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
+nav {
+  max-width: var(--container-max);
+  margin: auto;
+  padding: 0.9rem var(--container-padding);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
-.desktop-links{
-
-  display:flex;
-
-  justify-content:center;
-  align-items:center;
-
-  gap:1.2rem;
-
-  list-style:none;
-
-  margin:0;
-  padding:0;
+.desktop-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-
-
-.nav-link{
-
-  color:var(--secondary-text);
-
-  text-decoration:none;
-
-  font-size:.85rem;
-  font-weight:600;
-
-  transition:.2s;
+.nav-link {
+  color: var(--secondary-text);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: 0.2s;
 }
 
-
-
-.nav-link:hover{
-
-  color:var(--primary-text);
-
+.nav-link:hover {
+  color: var(--primary-text);
 }
 
-
-
-.mobile-menu-toggle{
-
-  display:none;
-
-  margin-left:auto;
-
-  width:2.4rem;
-  height:2.4rem;
-
-  border:1px solid rgba(181,214,145,.4);
-
-  background:transparent;
-
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-
-  gap:5px;
-
+.mobile-menu-toggle {
+  display: none;
+  margin-left: auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid rgba(181, 214, 145, 0.4);
+  background: transparent;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
-
-
-.mobile-menu-toggle span{
-
-  width:18px;
-  height:2px;
-
-  background:#d6e8b1;
-
+.mobile-menu-toggle span {
+  width: 18px;
+  height: 2px;
+  background: #d6e8b1;
 }
 
-
-
-#mobile-overlay{
-
-  position:fixed;
-
-  inset:0;
-
-  background:rgba(0,0,0,.5);
-
-  opacity:0;
-  pointer-events:none;
-
-  transition:.2s;
-
-  z-index:1001;
-
+#mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+  z-index: 1001;
 }
 
-
-
-#mobile-overlay.show{
-
-  opacity:1;
-  pointer-events:auto;
-
+#mobile-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-
-
-#mobile-sidebar{
-
-  position:fixed;
-
-  top:0;
-  right:0;
-
-  width:80%;
-  max-width:300px;
-
-  height:100vh;
-
-  padding:2rem;
-
-  background:#20282c;
-
-  transform:translateX(100%);
-
-  transition:.3s;
-
-  z-index:1002;
-
+#mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  max-width: 300px;
+  height: 100vh;
+  padding: 2rem;
+  background: #20282c;
+  transform: translateX(100%);
+  transition: 0.3s;
+  z-index: 1002;
 }
 
-
-
-#mobile-sidebar.open{
-
-  transform:translateX(0);
-
+#mobile-sidebar.open {
+  transform: translateX(0);
 }
 
-
-
-#mobile-sidebar ul{
-
-  list-style:none;
-
-  padding:2rem 0;
-
+#mobile-sidebar ul {
+  list-style: none;
+  padding: 2rem 0;
 }
 
-
-
-#mobile-sidebar li{
-
-  margin:1rem 0;
-
+#mobile-sidebar li {
+  margin: 1rem 0;
 }
 
-
-
-#mobile-sidebar a{
-
-  color:var(--primary-text);
-
-  text-decoration:none;
-
+#mobile-sidebar a {
+  color: var(--primary-text);
+  text-decoration: none;
 }
 
-
-
-#mobile-close{
-
-  float:right;
-
-  border:0;
-
-  background:none;
-
-  color:white;
-
-  font-size:2rem;
-
+#mobile-close {
+  float: right;
+  border: 0;
+  background: none;
+  color: white;
+  font-size: 2rem;
 }
 
-
-
-.skip-link{
-
-  position:absolute;
-  left:-999px;
-
+.skip-link {
+  position: absolute;
+  left: -999px;
 }
 
+@media (max-width: 900px) {
+  .desktop-links {
+    display: none;
+  }
 
-
-@media(max-width:900px){
-
-.desktop-links{
-  display:none;
+  .mobile-menu-toggle {
+    display: flex;
+  }
 }
-
-
-.mobile-menu-toggle{
-
-  display:flex;
-
-}
-
-}
-
 </style>

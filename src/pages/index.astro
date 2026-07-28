@@ -4,20 +4,18 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   <main id="main-content">
-
     <section class="hero">
-
       <h1>
         Aarav<br />
         Gupta
       </h1>
 
       <p>
-        15 year old developer building software, games, and developer tools.
+        15 year old developer building software, games, and things I find
+        interesting.
       </p>
 
       <div class="links">
-
         <a href="mailto:aaravgupta2709@proton.me">
           Mail
         </a>
@@ -29,72 +27,60 @@ import Layout from "../layouts/Layout.astro";
         <a href="https://linkedin.com/in/aarav2709">
           LinkedIn
         </a>
-
       </div>
-
     </section>
-
   </main>
 </Layout>
 
-
 <style>
-
 .hero {
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
-
   text-align: center;
 }
 
-
 .hero h1 {
   font-size: clamp(5rem, 12vw, 9rem);
-
-  line-height: .85;
-
+  line-height: 0.85;
   margin: 0;
-
   font-family: var(--font-display);
-
   color: var(--accent-color);
 }
 
-
 .hero p {
   margin-top: 2rem;
-
   font-size: 1.1rem;
-
   color: var(--secondary-text);
-
   max-width: 35rem;
+  line-height: 1.7;
 }
-
 
 .links {
   display: flex;
-
   gap: 1.2rem;
-
   margin-top: 1.5rem;
 }
 
-
 .links a {
   color: var(--secondary-text);
-
   text-decoration: none;
+  transition: var(--transition-smooth);
 }
-
 
 .links a:hover {
   color: var(--primary-text);
 }
 
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
+
+  .links {
+    gap: 1rem;
+  }
+}
 </style>

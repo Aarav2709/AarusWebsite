@@ -1,6 +1,6 @@
-@import './variables.css';
-@import './animations.css';
-@import './fonts.css';
+@import "./variables.css";
+@import "./animations.css";
+@import "./fonts.css";
 
 * {
   margin: 0;
@@ -12,6 +12,7 @@
 
 html {
   scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
   scrollbar-color: var(--accent-color) transparent;
   accent-color: var(--accent-color);
   color-scheme: dark;
@@ -23,42 +24,22 @@ body {
   font-weight: 500;
   line-height: 1.6;
   color: var(--primary-text);
-
   background:
-    radial-gradient(
-      circle at 12% 10%,
-      rgba(167, 192, 128, 0.18),
-      transparent 44%
-    ),
-    radial-gradient(
-      circle at 88% 22%,
-      rgba(127, 187, 179, 0.14),
-      transparent 40%
-    ),
-    linear-gradient(
-      162deg,
-      var(--bg-color) 0%,
-      var(--bg-elevated) 100%
-    );
-
+    radial-gradient(circle at 12% 10%, rgba(167, 192, 128, 0.18), transparent 44%),
+    radial-gradient(circle at 88% 22%, rgba(127, 187, 179, 0.14), transparent 40%),
+    linear-gradient(162deg, var(--bg-color) 0%, var(--bg-elevated) 100%);
   font-size: var(--font-size-base);
   letter-spacing: 0.005em;
-
   overflow-x: hidden;
-
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  text-rendering: optimizeLegibility;
-  text-wrap: pretty;
-  overflow-wrap: break-word;
-
   min-height: 100vh;
   overscroll-behavior-y: none;
-
   animation: pageEnter 0.35s ease;
 }
-
 
 @keyframes pageEnter {
   from {
@@ -72,63 +53,45 @@ body {
   }
 }
 
-
 body::before {
   content: "";
-
   position: fixed;
   inset: 0;
-
   pointer-events: none;
-
-  background-image:
-    radial-gradient(
-      rgba(167, 192, 128, 0.17) 0.8px,
-      transparent 0.8px
-    );
-
+  background-image: radial-gradient(
+    rgba(167, 192, 128, 0.17) 0.8px,
+    transparent 0.8px
+  );
   background-size: 24px 24px;
-
   opacity: 0.14;
-
   z-index: -3;
 }
 
-
 body::after {
   content: "";
-
   position: fixed;
   inset: 0;
-
   pointer-events: none;
-
-  background-image:
-    repeating-linear-gradient(
-      -45deg,
-      rgba(167, 192, 128, 0.06) 0,
-      rgba(167, 192, 128, 0.06) 16px,
-      transparent 16px,
-      transparent 32px
-    );
-
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(167, 192, 128, 0.06) 0,
+    rgba(167, 192, 128, 0.06) 16px,
+    transparent 16px,
+    transparent 32px
+  );
   opacity: 0.25;
-
   z-index: -2;
 }
-
 
 ::selection {
   background: var(--accent-soft);
   color: var(--primary-text);
 }
 
-
 :focus-visible {
   outline: 0.125rem solid var(--accent-color);
   outline-offset: 0.2rem;
 }
-
 
 .container {
   max-width: var(--container-max);
@@ -136,17 +99,14 @@ body::after {
   padding: 0 var(--container-padding);
 }
 
-
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-
 ::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.06);
+  background: rgba(0, 0, 0, 0.06);
 }
-
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(
@@ -154,14 +114,10 @@ body::after {
     var(--accent-color),
     var(--accent-strong)
   );
-
   border-radius: 999px;
-
   border: 2px solid transparent;
-
   background-clip: padding-box;
 }
-
 
 h1,
 h2,
@@ -169,132 +125,78 @@ h3,
 h4,
 h5,
 h6 {
-
   font-family: var(--font-display);
-
   font-weight: 500;
-
   letter-spacing: -0.03em;
-
   line-height: 1.15;
-
   text-wrap: balance;
-
 }
-
 
 h1 {
   font-weight: 700;
 }
 
-
 a {
-
   color: var(--accent-strong);
-
   text-decoration: none;
-
   font-weight: 600;
-
   transition: var(--transition-smooth);
-
 }
-
 
 a:hover {
-
   color: #c9e7a3;
-
 }
-
 
 a:focus-visible,
 button:focus-visible {
-
   outline: 2px solid var(--accent-color);
-
   outline-offset: 3px;
-
 }
-
 
 .fade-in {
-
   opacity: 0;
-
   animation: fadeIn 0.7s ease forwards;
-
 }
-
 
 .slide-up {
-
   opacity: 0;
-
   transform: translateY(20px);
-
   animation: slideUp 0.55s ease forwards;
-
 }
-
 
 pre,
 code,
 kbd,
 samp {
-
   font-family: var(--font-mono);
-
 }
-
 
 pre,
 code {
-
   text-shadow: none;
-
 }
 
-
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
-
     animation-duration: 0.01ms !important;
-
     animation-iteration-count: 1 !important;
-
     transition-duration: 0.01ms !important;
-
   }
-
 
   html {
-
     scroll-behavior: auto;
-
   }
-
 }
 
-
-@media (max-width:768px) {
-
+@media (max-width: 768px) {
   body::before {
-
-    background-size:20px 20px;
-
+    background-size: 20px 20px;
   }
-
 
   body::after {
-
-    background-size:36px 36px;
-
-    opacity:0.2;
-
+    background-size: 36px 36px;
+    opacity: 0.2;
   }
-
 }

@@ -14,67 +14,69 @@ const sortedProjects = projectsWithStars.sort(
 ---
 
 <Layout title="Projects | Aarav Gupta">
+  <main class="projects-page">
+    <section class="projects">
 
-<main class="projects-page">
+      <h1>Projects</h1>
 
-<section class="projects">
+      <p class="projects-description">
+        My projects, on which I spent a LOT of time.
+      </p>
 
-<h1>Projects</h1>
+      <div class="project-list">
+        {sortedProjects.map((project, index) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            tech={project.data.tech}
+            github={project.data.github}
+            live={project.data.live}
+            previewImage={project.data.previewImage}
+            previewAlt={project.data.previewAlt}
+            stars={project.stars}
+            index={index}
+          />
+        ))}
+      </div>
 
-<div class="project-list">
-
-{
-  sortedProjects.map((project, index) => (
-
-    <ProjectCard
-      title={project.data.title}
-      description={project.data.description}
-      tech={project.data.tech}
-      github={project.data.github}
-      live={project.data.live}
-      previewImage={project.data.previewImage}
-      previewAlt={project.data.previewAlt}
-      stars={project.stars}
-      index={index}
-    />
-
-  ))
-}
-
-</div>
-
-</section>
-
-</main>
-
+    </section>
+  </main>
 </Layout>
 
-
 <style>
-
 .projects-page {
-  min-height:100vh;
-  padding-top:8rem;
+  min-height: 100vh;
+  padding-top: 8rem;
 }
-
 
 .projects {
-  max-width:var(--container-max);
-  margin:auto;
-  padding:0 var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  text-align: center;
 }
-
 
 .projects h1 {
-  color:var(--accent-color);
-  font-size:var(--section-size);
-  margin-bottom:2rem;
+  color: var(--accent-color);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  margin: 0;
+  line-height: 1;
 }
 
+.projects-description {
+  margin: 1rem auto 0;
+  max-width: 42rem;
+  color: var(--secondary-text);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
 
 .project-list {
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
 }
-
 </style>

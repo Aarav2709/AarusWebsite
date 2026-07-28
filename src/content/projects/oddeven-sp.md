@@ -1,8 +1,8 @@
 ---
-title: "OddEven Singleplayer"
-description: "Terminal based odd even cricket engine with adaptive AI, rank progression, and a theme system. Python."
-tech: ["python"]
+title: "OddEven-SP"
+description: "OddEven-SP, also known as Odd Even: Singleplayer was my first ever OPEN SOURCED project, written in python. It's a hand cricket type of game, absurdly famous in my school!"
+tech:
+  - Python
 github: "https://github.com/Aarav2709/OddEven-SP"
-live: "https://oddevensp.vercel.app"
 order: 6
 ---

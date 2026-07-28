@@ -1,7 +1,9 @@
 ---
 title: "Needlelight"
-description: "Mod manager for Hollow Knight and Silksong with enhanced support, faster startup, and improved cross-platform tooling."
-tech: ["c#", "python"]
+description: "Highly Controversial, but a proper Mod Manager for both Hollow Knight and Hollow Knight: Silksong with Modrinth's Frontend rewritten in entirely by me."
+tech:
+  - Vue
+  - Rust
 github: "https://github.com/Aarav2709/Needlelight"
 featured: true
 order: 1

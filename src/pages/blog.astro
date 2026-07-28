@@ -10,85 +10,91 @@ const sortedPosts = posts.sort(
 ---
 
 <Layout title="Blog | Aarav Gupta">
+  <main id="main-content" class="page">
+    <h1>
+      Blog
+    </h1>
 
-<main id="main-content" class="page">
+    <div class="posts">
+      {sortedPosts.map((post) => (
+        <article class="post">
+          <a href={`/blog/${post.id.replace(".md", "")}`}>
+            <h2>
+              {post.data.title}
+            </h2>
 
-<h1>Blog</h1>
+            <p>
+              {post.data.description}
+            </p>
 
-<div class="posts">
-
-{
-  sortedPosts.map((post) => (
-    <article class="post">
-
-      <a href={`/blog/${post.id.replace(".md", "")}`}>
-        <h2>{post.data.title}</h2>
-
-        <p>
-          {post.data.description}
-        </p>
-
-        <small>
-          {post.data.date.toDateString()}
-        </small>
-      </a>
-
-    </article>
-  ))
-}
-
-</div>
-
-</main>
-
+            <small>
+              {post.data.date.toDateString()}
+            </small>
+          </a>
+        </article>
+      ))}
+    </div>
+  </main>
 </Layout>
 
-
 <style>
-
 .page {
-  max-width:var(--container-max);
-  margin:auto;
-  padding:8rem var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 8rem var(--container-padding) 4rem;
 }
-
 
 h1 {
-  color:var(--accent-color);
-  margin-bottom:2rem;
+  color: var(--accent-color);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  margin-bottom: 2.5rem;
+  text-align: center;
 }
-
 
 .posts {
-  display:flex;
-  flex-direction:column;
-  gap:1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
-
 
 .post {
-  border-bottom:1px solid var(--border-color);
-  padding-bottom:1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
 }
-
 
 .post a {
-  text-decoration:none;
+  text-decoration: none;
 }
-
 
 h2 {
-  color:var(--primary-text);
+  color: var(--primary-text);
+  font-size: var(--font-size-x-large);
+  margin-bottom: 0.6rem;
 }
-
 
 p {
-  color:var(--secondary-text);
+  color: var(--secondary-text);
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
 }
-
 
 small {
-  color:var(--tertiary-text);
+  color: var(--tertiary-text);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
 }
 
+.post:hover h2 {
+  color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-top: 6rem;
+  }
+
+  h1 {
+    text-align: left;
+  }
+}
 </style>

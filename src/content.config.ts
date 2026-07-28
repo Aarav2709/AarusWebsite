@@ -1,7 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-
 const projectsCollection = defineCollection({
   loader: glob({
     pattern: "**/*.md",
@@ -22,7 +21,6 @@ const projectsCollection = defineCollection({
   }),
 });
 
-
 const blogCollection = defineCollection({
   loader: glob({
     pattern: "**/*.md",
@@ -35,7 +33,6 @@ const blogCollection = defineCollection({
     date: z.coerce.date(),
   }),
 });
-
 
 export const collections = {
   projects: projectsCollection,

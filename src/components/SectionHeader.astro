@@ -15,60 +15,36 @@ const { title, number } = Astro.props;
   </h2>
 </div>
 
-
 <style>
 .section-header {
-  display:flex;
-  align-items:baseline;
-  gap:.8rem;
-
-  width:100%;
-
-  padding:.15rem 0 .95rem;
-
-  border-bottom:1px solid var(--border-color);
-
-  margin-bottom:1.4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 0.15rem 0 0.95rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.4rem;
 }
-
 
 .section-title {
-
-  margin:0;
-
-  font-size:var(--section-size);
-
-  font-weight:600;
-
-  color:var(--primary-text);
-
-  letter-spacing:-0.03em;
-
-  line-height:1.2;
-
+  margin: 0;
+  font-size: var(--section-size);
+  font-weight: 600;
+  color: var(--primary-text);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
-
 
 .section-number {
-
-  color:var(--accent-color);
-
-  font-size:.9rem;
-
-  font-weight:600;
-
-  font-family:var(--font-mono);
-
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
 }
 
-
-@media(max-width:768px){
-
+@media (max-width: 768px) {
   .section-header {
-
-    margin-bottom:1rem;
-
+    margin-bottom: 1rem;
   }
-
 }
 </style>

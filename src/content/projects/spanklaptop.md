@@ -1,7 +1,8 @@
 ---
 title: "SpankLaptop"
-description: "Hit your laptop and it plays funny noises, powered by Rust impact detection with configurable sensitivity and cooldown."
-tech: ["rust", "audio", "cli"]
+description: "Hit your laptop when you get angry, and it will make funny noises, which is definitely gonna make you laugh xD! Inspired by the original project, spank."
+tech:
+  - Rust
 github: "https://github.com/Aarav2709/SpankLaptop"
-order: 8
+order: 4
 ---
