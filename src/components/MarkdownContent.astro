@@ -1,88 +1,319 @@
-<div class="markdown">
+<div class="markdownContent">
   <slot />
 </div>
 
 <style>
-.markdown {
-  max-width:48rem;
-  margin:0 auto;
-  color:var(--secondary-text);
-  font-size:1.08rem;
-  line-height:1.9;
+.markdownContent {
+  max-width: 48rem;
+  margin: 0 auto;
+  color: var(--secondary-text);
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  line-height: 1.85;
 }
 
-.markdown p {
-  margin:1.5rem 0;
+.markdownContent :global(p) {
+  margin: 1.45rem 0;
 }
 
-.markdown h2 {
-  margin-top:4rem;
-  margin-bottom:1rem;
-  color:var(--primary-text);
-  font-family:var(--font-display);
-  font-size:2.2rem;
-  letter-spacing:-0.04em;
+.markdownContent :global(h2),
+.markdownContent :global(h3),
+.markdownContent :global(h4) {
+  color: var(--primary-text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
 }
 
-.markdown h3 {
-  margin-top:3rem;
-  margin-bottom:1rem;
-  color:var(--primary-text);
-  font-size:1.5rem;
+.markdownContent :global(h2) {
+  margin: 4.5rem 0 1.1rem;
+  font-size: clamp(2rem, 5vw, 2.75rem);
 }
 
-.markdown strong {
-  color:var(--primary-text);
-  font-weight:700;
+.markdownContent :global(h3) {
+  margin: 3rem 0 0.9rem;
+  font-size: clamp(1.45rem, 4vw, 1.9rem);
 }
 
-.markdown ul,
-.markdown ol {
-  margin:1.5rem 0;
-  padding-left:2rem;
+.markdownContent :global(h4) {
+  margin: 2.4rem 0 0.75rem;
+  font-size: 1.2rem;
 }
 
-.markdown li {
-  margin:.5rem 0;
+.markdownContent :global(strong) {
+  color: var(--primary-text);
 }
 
-.markdown blockquote {
-  margin:2rem 0;
-  padding:1rem 1.5rem;
-  border-left:3px solid var(--accent-color);
-  color:var(--secondary-text);
+.markdownContent :global(a) {
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
 }
 
-.markdown code {
-  font-family:var(--font-mono);
-  background:rgba(167,192,128,.12);
-  padding:.2rem .45rem;
-  border-radius:.4rem;
+.markdownContent :global(a:hover) {
+  color: var(--primary-text);
 }
 
-.markdown pre {
-  margin:2rem 0;
-  padding:1.5rem;
-  overflow-x:auto;
-  background:rgba(0,0,0,.3);
-  border:1px solid var(--border-color);
-  border-radius:1rem;
+.markdownContent :global(ul),
+.markdownContent :global(ol) {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
 }
 
-.markdown pre code {
-  padding:0;
-  background:none;
+.markdownContent :global(li) {
+  margin: 0.5rem 0;
+  padding-left: 0.2rem;
 }
 
-.markdown img {
-  width:100%;
-  margin:3rem 0;
-  border-radius:1rem;
+.markdownContent :global(li::marker) {
+  color: var(--accent-color);
 }
 
-@media(max-width:768px){
-  .markdown {
-    font-size:1rem;
+.markdownContent :global(li > ul),
+.markdownContent :global(li > ol) {
+  margin: 0.5rem 0;
+}
+
+.markdownContent :global(input[type="checkbox"]) {
+  width: 0.95em;
+  height: 0.95em;
+  margin-right: 0.45rem;
+  accent-color: var(--accent-color);
+}
+
+.markdownContent :global(blockquote) {
+  margin: 2.2rem 0;
+  padding: 0.25rem 0 0.25rem 1.4rem;
+  border-left: 0.2rem solid var(--accent-color);
+  color: var(--primary-text);
+  font-size: 1.08em;
+}
+
+.markdownContent :global(blockquote p) {
+  margin: 0.55rem 0;
+}
+
+.markdownContent :global(hr) {
+  height: 1px;
+  margin: 3.5rem 0;
+  border: 0;
+  background: var(--border-color);
+}
+
+.markdownContent :global(:not(pre) > code) {
+  padding: 0.16em 0.42em;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 20%, transparent);
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+  color: var(--primary-text);
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+}
+
+.markdownContent :global([data-rehype-pretty-code-figure]) {
+  margin: 2.4rem 0;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: var(--rounded-corner);
+  background: #111817;
+  box-shadow: var(--shadow);
+}
+
+.markdownContent :global([data-rehype-pretty-code-title]) {
+  margin: 0;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--accent-color) 9%, transparent);
+  color: var(--primary-text);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.2;
+}
+
+.markdownContent :global(pre) {
+  margin: 0;
+  padding: 0.75rem 0;
+  overflow-x: auto;
+  background: transparent;
+  font-size: 0.87rem;
+  line-height: 1.7;
+}
+
+.markdownContent :global(pre code) {
+  display: block;
+  min-width: max-content;
+  padding: 0;
+  background: transparent;
+  font-family: var(--font-mono);
+}
+
+.markdownContent :global(pre [data-line]) {
+  display: block;
+  min-height: 1.7em;
+  padding: 0 1.1rem;
+  border-left: 0.16rem solid transparent;
+}
+
+.markdownContent :global(pre code[data-line-numbers] [data-line]::before) {
+  display: inline-block;
+  width: 2.2rem;
+  margin-right: 1rem;
+  color: var(--tertiary-text);
+  content: counter(line);
+  counter-increment: line;
+  text-align: right;
+  user-select: none;
+}
+
+.markdownContent :global(pre code[data-line-numbers]) {
+  counter-reset: line;
+}
+
+.markdownContent :global(pre [data-highlighted-line]) {
+  border-left-color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color) 14%, transparent);
+}
+
+.markdownContent :global(pre .blogDiffAddition) {
+  border-left-color: #77c999;
+  background: rgba(79, 181, 111, 0.16);
+}
+
+.markdownContent :global(pre .blogDiffDeletion) {
+  border-left-color: #e38989;
+  background: rgba(217, 102, 102, 0.16);
+}
+
+.markdownContent :global([data-rehype-pretty-code-caption]) {
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--tertiary-text);
+  font-size: 0.85rem;
+}
+
+.markdownContent :global(table) {
+  width: 100%;
+  margin: 2.2rem 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--rounded-corner-small);
+  border-spacing: 0;
+  border-collapse: separate;
+  table-layout: fixed;
+}
+
+.markdownContent :global(th),
+.markdownContent :global(td) {
+  min-width: 9rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.markdownContent :global(th) {
+  background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+  color: var(--primary-text);
+  font-weight: 700;
+}
+
+.markdownContent :global(tr:last-child td) {
+  border-bottom: 0;
+}
+
+.markdownContent :global(.blogFigure) {
+  margin: 2.5rem 0;
+}
+
+.markdownContent :global(.blogFigure img) {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--rounded-corner);
+  box-shadow: var(--shadow);
+}
+
+.markdownContent :global(.blogFigure figcaption) {
+  margin-top: 0.7rem;
+  color: var(--tertiary-text);
+  font-size: 0.87rem;
+  text-align: center;
+}
+
+.markdownContent :global(kbd) {
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 0.08em 0.4em;
+  border: 1px solid var(--border-color);
+  border-bottom-width: 0.18rem;
+  border-radius: 0.35rem;
+  background: var(--bg-panel-strong);
+  color: var(--primary-text);
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.markdownContent :global(.blogCallout) {
+  margin: 2rem 0;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 30%, transparent);
+  border-left: 0.25rem solid var(--accent-color);
+  border-radius: 0 var(--rounded-corner-small) var(--rounded-corner-small) 0;
+  background: color-mix(in srgb, var(--accent-color) 8%, transparent);
+}
+
+.markdownContent :global(.blogCallout > :first-child) {
+  margin-top: 0;
+}
+
+.markdownContent :global(.blogCallout > :last-child) {
+  margin-bottom: 0;
+}
+
+.markdownContent :global(.blogCalloutTitle) {
+  color: var(--primary-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.markdownContent :global(.blogCalloutwarning) {
+  border-left-color: #e0b05c;
+  background: rgba(224, 176, 92, 0.09);
+}
+
+.markdownContent :global(.blogCalloutdanger) {
+  border-left-color: #df7777;
+  background: rgba(223, 119, 119, 0.09);
+}
+
+.markdownContent :global(section.footnotes) {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--tertiary-text);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .markdownContent :global(h2) {
+    margin-top: 3.5rem;
+  }
+
+  .markdownContent :global(pre) {
+    font-size: 0.8rem;
+  }
+
+  .markdownContent :global(pre [data-line]) {
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
+  }
+
+  .markdownContent :global(pre code[data-line-numbers] [data-line]::before) {
+    width: 1.6rem;
+    margin-right: 0.75rem;
   }
 }
 </style>

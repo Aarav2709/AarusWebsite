@@ -1,72 +1,27 @@
 ---
 interface Props {
   date: Date;
-  tags?: string[];
 }
 
-const { date, tags = [] } = Astro.props;
+const { date } = Astro.props;
+const formatDate = (value: Date) =>
+  new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(value);
 ---
 
-<div class="meta">
-
-  <time>
-    {date.toDateString()}
-  </time>
-
-  {
-    tags.length > 0 && (
-      <div class="tags">
-        {
-          tags.map((tag) => (
-            <span>
-              {tag}
-            </span>
-          ))
-        }
-      </div>
-    )
-  }
-
+<div class="blogMeta">
+  <time datetime={date.toISOString()}>{formatDate(date)}</time>
 </div>
 
 <style>
-.meta {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:1rem;
-  flex-wrap:wrap;
-  margin-top:1.5rem;
-  color:var(--secondary-text);
-  font-size:.95rem;
-}
-
-time {
-  font-family:var(--font-family);
-}
-
-
-.tags {
-  display:flex;
-  gap:.6rem;
-}
-
-
-.tags span {
-  color:var(--accent-color);
-  font-size:.85rem;
-}
-
-
-.tags span:not(:last-child)::after {
-  content:"•";
-  margin-left:.6rem;
-  color:var(--secondary-text);
-}
-
-@media(max-width:768px){
-  .meta {
-    flex-direction:column;
-  }
+.blogMeta {
+  margin-top: 1.5rem;
+  color: var(--secondary-text);
+  font-size: 0.94rem;
+  text-align: center;
 }
 </style>

@@ -1,12 +1,12 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
 import BlogHeader from "../../components/BlogHeader.astro";
 import BlogMeta from "../../components/BlogMeta.astro";
 import MarkdownContent from "../../components/MarkdownContent.astro";
-import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
 
   return posts.map((post) => ({
     params: {
@@ -22,77 +22,79 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | AarusPortfolio`}>
+<Layout title={`${post.data.title} | AarusPortfolio`} description={post.data.description}>
   <main id="main-content" class="page">
     <article class="article">
+      <BlogHeader title={post.data.title} description={post.data.description} />
 
-      <BlogHeader
-        title={post.data.title}
-        description={post.data.description}
-      />
+      <BlogMeta date={post.data.date} />
 
-      <BlogMeta
-        date={post.data.date}
-        tags={post.data.tags}
-      />
-
-      <div class="divider"></div>
+      <div class="divider" aria-hidden="true"></div>
 
       <MarkdownContent>
         <Content />
       </MarkdownContent>
 
-      <footer class="article-footer">
-        <p>
-          Thanks for reading.
-        </p>
-
-        <a href="/blog">
-          ← Back to all posts
-        </a>
+      <footer class="articleFooter">
+        <p>Thanks for reading.</p>
+        <a href="/blog">Back to all posts</a>
       </footer>
-
     </article>
   </main>
 </Layout>
 
 <style>
 .page {
-  min-height:100vh;
-  padding:8rem var(--container-padding) 6rem;
+  min-height: 100vh;
+  padding: 8rem var(--container-padding) 6rem;
 }
 
 .article {
-  max-width:62rem;
-  margin:0 auto;
+  max-width: 68rem;
+  margin: 0 auto;
 }
 
 .divider {
-  height:1px;
-  background:var(--border-color);
-  margin:4rem 0;
+  max-width: 48rem;
+  height: 1px;
+  margin: 3rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--border-color) 12%, var(--border-color) 88%, transparent);
 }
 
-.article-footer {
-  margin-top:5rem;
-  padding-top:2rem;
-  border-top:1px solid var(--border-color);
-  text-align:center;
+.articleFooter {
+  max-width: 48rem;
+  margin: 5rem auto 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
 }
 
-.article-footer p {
-  color:var(--secondary-text);
-  margin:0;
+.articleFooter p {
+  margin: 0;
+  color: var(--secondary-text);
 }
 
-.article-footer a {
-  display:inline-block;
-  margin-top:1rem;
-  color:var(--accent-color);
-  text-decoration:none;
+.articleFooter a {
+  display: inline-block;
+  margin-top: 0.9rem;
+  color: var(--accent-color);
 }
 
-.article-footer a:hover {
-  color:var(--primary-text);
+.articleFooter a:hover {
+  color: var(--primary-text);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-top: 6.5rem;
+  }
+
+  .divider {
+    margin-top: 2.5rem;
+  }
+
+  .articleFooter {
+    margin-top: 4rem;
+  }
 }
 </style>

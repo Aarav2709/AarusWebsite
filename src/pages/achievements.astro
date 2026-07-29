@@ -1,65 +1,118 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import AchievementCard from "../components/AchievementCard.astro";
+import Layout from "../layouts/Layout.astro";
 
 const achievements = [
   {
-    title: "Hackathon Winner",
-    description:
-      "Built projects, competed with ideas, and learned a lot through hackathons.",
+    title: "CS50 Python completion",
+    detail: "Harvard University",
+    description: "Completed Harvard's CS50 Introduction to Programming with Python and received the official completion certificate.",
+    image: "/images/certs/CS50P.png",
+    imageAlt: "CS50 Python completion certificate awarded by Harvard University",
+    imageHref: "/images/certs/CS50P.png",
   },
   {
-    title: "JEE Mock Achievement",
-    description:
-      "Scored AIR 300 in a mock JEE test for 11th grade students.",
+    title: "Lumi Hackathon, 4th prize",
+    detail: "International hackathon winner",
+    description: "Built a WebOS from scratch that recreates an Arch Linux and Hyprland desktop experience. Placed fourth and won US$200.",
   },
   {
-    title: "Game Development",
-    description:
-      "Created games and interactive experiences using Roblox Studio and Lua.",
+    title: "Level Zero game development, 2nd prize",
+    detail: "Silico Battles v22.1 • Ahlcon Public School",
+    description: "Won second prize in the game development competition held during Level Zero at Silico Battles v22.1.",
+  },
+  {
+    title: "Turing Complete Python and DSA, 3rd prize",
+    detail: "Incognito Mark X • Somerville School Noida",
+    description: "Placed third after competing with participants from 15 schools in the Python and DSA competition.",
+  },
+  {
+    title: "100K+ project downloads",
+    detail: "Oddeven SP • Needlelight • Hyprism",
+    description: "More than 100,000 downloads across open source projects built for practical developer and desktop workflows.",
+  },
+  {
+    title: "500K+ portfolio visitors",
+    detail: "Historic portfolio traffic",
+    description: "Reached more than 500,000 visitors on an earlier portfolio link. The old analytics are no longer available after the link expired.",
+  },
+  {
+    title: "GambitoR 4.0, IIT Roorkee",
+    detail: "Top 80 students across India",
+    description: "Qualified through maths, science, and reasoning preliminaries with over 10,000 students, earning a three day IIT Roorkee trip.",
+  },
+  {
+    title: "Prelims and Prelims 2 qualifier",
+    detail: "Top 10 selected",
+    description: "Advanced through rigorous Python and DSA, maths, and reasoning rounds against students from class 9 through college fourth year.",
   },
 ];
 ---
 
-<Layout title="Achievements | AarusPortfolio">
+<Layout title="Achievements | AarusPortfolio" description="Selected awards, competition results, and project milestones by Aarav Gupta.">
   <main id="main-content" class="page">
+    <section class="achievements" aria-labelledby="achievementsTitle">
+      <header class="header reveal">
+        <h1 id="achievementsTitle">Achievements</h1>
+        <p>A collection of competitions, milestones, and work I am proud of.</p>
+      </header>
 
-    <section>
-      <h1>Achievements</h1>
-
-      <div class="achievement-list">
-        {
-          achievements.map((achievement, index) => (
-            <AchievementCard
-              {...achievement}
-              index={index}
-            />
-          ))
-        }
+      <div class="achievementList">
+        {achievements.map((achievement, index) => <AchievementCard {...achievement} index={index} />)}
       </div>
-
     </section>
-
   </main>
 </Layout>
 
-
 <style>
 .page {
-  max-width: var(--container-max);
+  min-height: 100vh;
+  padding: 8rem var(--container-padding) 5rem;
+}
+
+.achievements {
+  max-width: 70rem;
   margin: 0 auto;
-  padding: 8rem var(--container-padding) 4rem;
+}
+
+.header {
+  max-width: 43rem;
+  margin-bottom: 3.5rem;
 }
 
 h1 {
-  color: var(--accent-color);
-  font-size: var(--section-size);
-  margin-bottom: 2rem;
+  margin: 0;
+  color: var(--primary-text);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.4rem);
+  letter-spacing: -0.065em;
+  line-height: 0.95;
 }
 
-.achievement-list {
+.header p {
+  margin: 1.2rem 0 0;
+  color: var(--secondary-text);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.achievementList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding-top: 6.5rem;
+  }
+
+  .header {
+    margin-bottom: 2.5rem;
+  }
+
+  .achievementList {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
