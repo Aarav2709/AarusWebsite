@@ -5,6 +5,10 @@ interface Props {
   tech: string[];
   github?: string;
   live?: string;
+  buttons?: {
+    text: string;
+    url: string;
+  }[];
   previewImage?: string;
   previewAlt?: string;
   stars?: number;
@@ -17,6 +21,7 @@ const {
   tech,
   github,
   live,
+  buttons = [],
   previewImage,
   previewAlt,
   stars = 0,
@@ -47,24 +52,26 @@ const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
 
     <div class="project-links">
       {github && (
-        <a
-          href={github}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          source ↗
+        <a href={github} target="_blank" rel="noopener noreferrer">
+          Source ↗
         </a>
       )}
 
       {live && (
+        <a href={live} target="_blank" rel="noopener noreferrer">
+          Live ↗
+        </a>
+      )}
+
+      {buttons.map((button) => (
         <a
-          href={live}
+          href={button.url}
           target="_blank"
           rel="noopener noreferrer"
         >
-          live ↗
+          {button.text} ↗
         </a>
-      )}
+      ))}
 
       {github && (
         <span class="stars">
@@ -81,7 +88,7 @@ const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
           data-preview-alt={resolvedPreviewAlt}
           data-preview-title={`${title} preview`}
         >
-          preview
+          Preview
         </button>
       )}
     </div>
@@ -124,62 +131,61 @@ const resolvedPreviewAlt = previewAlt ?? `${title} preview`;
 }
 
 .project-tech {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--secondary-text);
-  margin-bottom: 0.75rem;
+  font-size:0.85rem;
+  font-weight:500;
+  letter-spacing:0.05em;
+  color:var(--tertiary-text);
+  margin-bottom:1rem;
 }
 
 h2 {
-  margin: 0;
-  color: var(--primary-text);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 500;
-  line-height: 1.2;
+  margin:0;
+  color:var(--primary-text);
+  font-size:clamp(1.5rem,3vw,2rem);
+  font-weight:500;
+  line-height:1.2;
 }
 
 p {
-  margin: 1rem auto 0;
-  color: var(--secondary-text);
-  line-height: 1.7;
-  max-width: 48rem;
+  margin:1rem auto 0;
+  color:var(--secondary-text);
+  line-height:1.7;
+  max-width:48rem;
 }
 
 .project-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1rem;
+  margin-top:1.5rem;
+  flex-wrap:wrap;
 }
 
 .project-links a,
 .preview-button {
-  color: var(--primary-text);
-  font-size: 0.9rem;
-  text-decoration: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.25s ease;
+  color:var(--primary-text);
+  font-size:0.9rem;
+  text-decoration:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  transition:color .25s ease;
 }
 
 .project-links a:hover,
 .preview-button:hover {
-  color: var(--accent-color);
+  color:var(--accent-color);
 }
 
 .stars {
-  color: var(--secondary-text);
-  font-size: 0.9rem;
+  color:var(--secondary-text);
+  font-size:0.9rem;
 }
 
-@media (max-width: 768px) {
+@media(max-width:768px) {
   .project {
-    padding: 2rem 0;
+    padding:2rem 0;
   }
 }
 </style>

@@ -4,5 +4,4 @@ description: "Hit your laptop when you get angry, and it will make funny noises,
 tech:
   - Rust
 github: "https://github.com/Aarav2709/SpankLaptop"
-order: 4
 ---

@@ -5,6 +5,7 @@ tech:
   - Vue
   - Rust
 github: "https://github.com/Aarav2709/Needlelight"
-featured: true
-order: 1
+buttons:
+  - text: "Download"
+    url: "https://github.com/Aarav2709/Needlelight/releases/tag/v7.0.0.0"
 ---

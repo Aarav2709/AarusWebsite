@@ -9,7 +9,7 @@ const projects = await getCollection("projects");
 const projectsWithStars = await getAllProjectStars(projects);
 
 const sortedProjects = projectsWithStars.sort(
-  (a, b) => a.data.order - b.data.order
+  (a, b) => b.stars - a.stars
 );
 ---
 
@@ -31,8 +31,7 @@ const sortedProjects = projectsWithStars.sort(
             tech={project.data.tech}
             github={project.data.github}
             live={project.data.live}
-            previewImage={project.data.previewImage}
-            previewAlt={project.data.previewAlt}
+            buttons={project.data.buttons}
             stars={project.stars}
             index={index}
           />
@@ -45,38 +44,38 @@ const sortedProjects = projectsWithStars.sort(
 
 <style>
 .projects-page {
-  min-height: 100vh;
-  padding-top: 8rem;
+  min-height:100vh;
+  padding-top:8rem;
 }
 
 .projects {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
-  text-align: center;
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:0 var(--container-padding);
+  text-align:center;
 }
 
 .projects h1 {
-  color: var(--accent-color);
-  font-size: clamp(3rem, 6vw, 4.5rem);
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  margin: 0;
-  line-height: 1;
+  color:var(--accent-color);
+  font-size:clamp(3rem,6vw,4.5rem);
+  font-weight:700;
+  letter-spacing:-0.05em;
+  margin:0;
+  line-height:1;
 }
 
 .projects-description {
-  margin: 1rem auto 0;
-  max-width: 42rem;
-  color: var(--secondary-text);
-  font-size: 1.1rem;
-  line-height: 1.7;
+  margin:1rem auto 0;
+  max-width:42rem;
+  color:var(--secondary-text);
+  font-size:1.1rem;
+  line-height:1.7;
 }
 
 .project-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:3rem;
 }
 </style>

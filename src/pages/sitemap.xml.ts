@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
 export const GET: APIRoute = async ({ site }) => {
-  const siteUrl = site?.toString() || "https://aarus2709.me/";
+  const siteUrl = site?.toString() || "https://aarav2709.github.io";
 
   const projects = await getCollection("projects");
 

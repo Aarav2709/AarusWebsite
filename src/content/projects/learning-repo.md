@@ -7,5 +7,4 @@ tech:
   - CSS
   - JS
 github: "https://github.com/Aarav2709/LearningRepo"
-order: 4
 ---

@@ -5,7 +5,6 @@ interface Props {
   detail?: string;
   image?: string;
   imageAlt?: string;
-  imageHref?: string;
   index?: number;
 }
 
@@ -15,125 +14,265 @@ const {
   detail,
   image,
   imageAlt = "",
-  imageHref,
   index = 0,
 } = Astro.props;
 ---
 
 <article class="achievementCard reveal">
-  {image && (
-    <a
+  {image ? (
+    <button
       class="preview"
-      href={imageHref ?? image}
-      target="_blank"
-      rel="noopener noreferrer"
+      data-image={image}
+      data-alt={imageAlt}
       aria-label={`View ${title}`}
     >
       <img src={image} alt={imageAlt} loading="lazy" />
-      <span>View image</span>
-    </a>
+      <span>View image ↗</span>
+    </button>
+  ) : (
+    <div class="placeholder">
+      {String(index + 1).padStart(2, "0")}
+    </div>
   )}
 
   <div class="content">
-    <span class="number">{String(index + 1).padStart(2, "0")}</span>
-    {detail && <p class="detail">{detail}</p>}
-    <h2>{title}</h2>
-    <p class="description">{description}</p>
+    <span class="number">
+      {String(index + 1).padStart(2, "0")}
+    </span>
+
+    {detail && (
+      <p class="detail">
+        {detail}
+      </p>
+    )}
+
+    <h2>
+      {title}
+    </h2>
+
+    <p class="description">
+      {description}
+    </p>
   </div>
 </article>
+
+<div class="viewer" aria-hidden="true">
+  <button class="viewerClose" aria-label="Close image viewer">
+    ×
+  </button>
+
+  <img class="viewerImage" alt="" />
+</div>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".preview");
+  const viewer = document.querySelector<HTMLElement>(".viewer");
+  const viewerImage = document.querySelector<HTMLImageElement>(".viewerImage");
+  const close = document.querySelector<HTMLButtonElement>(".viewerClose");
+
+  let previousOverflow = "";
+
+  function openViewer(image: string, alt: string) {
+    if (!viewer || !viewerImage) return;
+
+    viewerImage.src = image;
+    viewerImage.alt = alt;
+
+    previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    viewer.classList.add("active");
+    viewer.setAttribute("aria-hidden", "false");
+  }
+
+  function closeViewer() {
+    if (!viewer) return;
+
+    viewer.classList.remove("active");
+    viewer.setAttribute("aria-hidden", "true");
+
+    document.body.style.overflow = previousOverflow;
+    document.documentElement.style.overflow = "";
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      openViewer(
+        button.dataset.image ?? "",
+        button.dataset.alt ?? ""
+      );
+    });
+  });
+
+  close?.addEventListener("click", closeViewer);
+
+  viewer?.addEventListener("click", (event) => {
+    if (event.target === viewer) {
+      closeViewer();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeViewer();
+    }
+  });
+</script>
 
 <style>
 .achievementCard {
   display: flex;
-  min-width: 0;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--border-color);
   border-radius: var(--rounded-corner);
   background: var(--glass-bg);
   box-shadow: var(--edge-highlight), var(--shadow);
-  transition: var(--transition-bounce);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 
 .achievementCard:hover {
+  transform: translateY(-0.35rem);
   border-color: color-mix(in srgb, var(--accent-color) 55%, transparent);
   box-shadow: var(--edge-highlight), var(--shadow-raised);
-  transform: translateY(-0.35rem);
 }
 
-.preview {
+.preview,
+.placeholder {
   position: relative;
-  display: block;
+  width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  border: 0;
   border-bottom: 1px solid var(--border-color);
   background: var(--bg-panel-strong);
 }
 
+.preview {
+  padding: 0;
+  cursor: pointer;
+}
+
 .preview img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.35s ease;
-}
-
-.preview::after {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 42%, rgba(17, 23, 24, 0.78));
-  content: "";
-}
-
-.preview span {
-  position: absolute;
-  right: 1rem;
-  bottom: 0.8rem;
-  z-index: 1;
-  color: var(--primary-text);
-  font-size: 0.8rem;
-  font-weight: 700;
+  transition: transform .2s ease;
 }
 
 .preview:hover img {
   transform: scale(1.04);
 }
 
-.content {
+.preview::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    transparent,
+    rgba(0,0,0,.7)
+  );
+}
+
+.preview span {
+  position: absolute;
+  right: 1rem;
+  bottom: .9rem;
+  z-index: 2;
+  color: var(--primary-text);
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.placeholder {
   display: flex;
-  min-height: 15rem;
-  flex: 1;
-  flex-direction: column;
-  padding: 1.4rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  font-family: var(--font-display);
+  font-size: 3rem;
+  opacity: .25;
+}
+
+.content {
+  padding: 1.5rem;
+  text-align: center;
 }
 
 .number {
+  display: block;
+  margin-bottom: .7rem;
   color: var(--accent-color);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  font-size: .9rem;
+  font-weight: 600;
+  opacity: .8;
 }
 
 .detail {
-  margin: 0.65rem 0 0;
+  margin: .5rem 0 0;
   color: var(--tertiary-text);
-  font-size: 0.78rem;
-  line-height: 1.45;
+  font-size: .85rem;
+  line-height: 1.5;
 }
 
 h2 {
-  margin: 0.65rem 0 0;
-  color: var(--primary-text);
+  margin: .8rem 0 0;
+  color: var(--accent-color);
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.8vw, 1.8rem);
-  letter-spacing: -0.04em;
-  line-height: 1.08;
+  font-size: clamp(1.4rem,3vw,1.9rem);
+  letter-spacing: -.045em;
+  line-height: 1.1;
 }
 
 .description {
-  margin: 0.85rem 0 0;
+  margin: .9rem 0 0;
   color: var(--secondary-text);
-  font-size: 0.95rem;
-  line-height: 1.68;
+  font-size: .95rem;
+  line-height: 1.7;
+}
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(0,0,0,.82);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+.viewer.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.viewerImage {
+  max-width: min(90vw,1100px);
+  max-height: 90vh;
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.viewerClose {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--primary-text);
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  cursor: pointer;
+  opacity: .8;
+}
+
+.viewerClose:hover {
+  opacity: 1;
 }
 </style>

@@ -6,5 +6,7 @@ tech:
   - CSS
   - JS
 github: "https://github.com/Aarav2709/ProdTab"
-order: 7
+buttons:
+  - text: "Demo"
+    url: "https://prodtab.vercel.app"
 ---

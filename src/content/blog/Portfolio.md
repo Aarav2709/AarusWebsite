@@ -1,5 +1,5 @@
 ---
-title: "Building my portfolio"
+title: "Building my Portfolio"
 description: "How I rebuilt my personal site to feel more like a place for work in progress."
 date: 2026-07-27
 draft: false

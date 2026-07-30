@@ -5,5 +5,4 @@ tech:
   - React
 github: "https://github.com/Aarav2709/LearningRepo"
 live: "https://passionindicator.vercel.app"
-order: 4
 ---

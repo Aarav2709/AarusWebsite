@@ -4,61 +4,85 @@ import Layout from "../layouts/Layout.astro";
 
 const achievements = [
   {
-    title: "CS50 Python completion",
+    title: "CS50 Python Completion!",
     detail: "Harvard University",
-    description: "Completed Harvard's CS50 Introduction to Programming with Python and received the official completion certificate.",
+    description:
+      "Completed Harvard's CS50 Introduction to Programming with Python and received the official completion certificate.",
     image: "/images/certs/CS50P.png",
-    imageAlt: "CS50 Python completion certificate awarded by Harvard University",
+    imageAlt: "CS50 Python Completion Certificate awarded by Harvard University.",
     imageHref: "/images/certs/CS50P.png",
   },
   {
-    title: "Lumi Hackathon, 4th prize",
-    detail: "International hackathon winner",
-    description: "Built a WebOS from scratch that recreates an Arch Linux and Hyprland desktop experience. Placed fourth and won US$200.",
-  },
-  {
-    title: "Level Zero game development, 2nd prize",
+    title: "Level Zero, Game Dev Competition, 2nd Position!",
     detail: "Silico Battles v22.1 • Ahlcon Public School",
-    description: "Won second prize in the game development competition held during Level Zero at Silico Battles v22.1.",
+    description:
+      "Won second prize in the game development competition held during Level Zero at Silico Battles v22.1.",
+    image: "/images/certs/Silico.png",
+    imageAlt: "Silico Battle v22.1 Trophy and Cert!",
+    imageHref: "/images/certs/Silico.png",
   },
   {
-    title: "Turing Complete Python and DSA, 3rd prize",
+    title: "Turing Complete Python and DSA, 3rd Position!",
     detail: "Incognito Mark X • Somerville School Noida",
-    description: "Placed third after competing with participants from 15 schools in the Python and DSA competition.",
+    description:
+      "Placed third after competing with participants from 15 schools in the Python and DSA competition.",
+    image: "/images/certs/Incognito.png",
+    imageAlt: "Incognito Mark X Trophy and Cert!",
+    imageHref: "/images/certs/Incognito.png",
   },
   {
-    title: "100K+ project downloads",
-    detail: "Oddeven SP • Needlelight • Hyprism",
-    description: "More than 100,000 downloads across open source projects built for practical developer and desktop workflows.",
+    title: "GambitoR 4.0, IIT Roorkee, Certificate of Excellence!",
+    detail: "One of the Top 80 Students across India!",
+    description:
+      "Qualified through maths, science, and reasoning preliminaries with over 10,000 students, earning a three day IIT Roorkee trip.",
+      image: "/images/certs/IITR.png",
+      imageAlt: "GambitoR 4.0 Certificate of Excellence!",
+      imageHref: "/images/certs/IITR.png",
   },
   {
-    title: "500K+ portfolio visitors",
-    detail: "Historic portfolio traffic",
-    description: "Reached more than 500,000 visitors on an earlier portfolio link. The old analytics are no longer available after the link expired.",
+    title: "Shaastra 2026, IIT Madras!",
+    detail: "One of the 10 students selected for the Final Round!",
+    description:
+      "Advanced through rigorous Python and DSA, maths, and reasoning rounds against students from class 9 through college fourth year.",
+    image: "/images/certs/IITM.png",
+    imageAlt: "Shaastra 2026 Participation Certificate.",
+    imageHref: "/images/certs/IITM.png",
   },
   {
-    title: "GambitoR 4.0, IIT Roorkee",
-    detail: "Top 80 students across India",
-    description: "Qualified through maths, science, and reasoning preliminaries with over 10,000 students, earning a three day IIT Roorkee trip.",
-  },
-  {
-    title: "Prelims and Prelims 2 qualifier",
-    detail: "Top 10 selected",
-    description: "Advanced through rigorous Python and DSA, maths, and reasoning rounds against students from class 9 through college fourth year.",
+    title: "Lumi International Hackathon!",
+    detail: "4th Position • $200 Prize",
+    description:
+      "Created HyprWeb, a WebOS that replicates Arch Linux and Hyprland. The project impressed judges, and the CEO of Lumi shared the achievement publicly.",
+    image: "/images/certs/Lumi.png",
+    imageAlt: "Tweet by Lumi's CEO, for my achievement.",
+    imageHref: "/images/certs/Lumi.png",
   },
 ];
 ---
 
-<Layout title="Achievements | AarusPortfolio" description="Selected awards, competition results, and project milestones by Aarav Gupta.">
+<Layout
+  title="Achievements | AarusPortfolio"
+  description="Selected awards, competition results, and project milestones by Aarav Gupta."
+>
   <main id="main-content" class="page">
     <section class="achievements" aria-labelledby="achievementsTitle">
       <header class="header reveal">
-        <h1 id="achievementsTitle">Achievements</h1>
-        <p>A collection of competitions, milestones, and work I am proud of.</p>
+        <h1 id="achievementsTitle">
+          Achievements
+        </h1>
+
+        <p>
+          A collection of competitions, milestones, and work I am proud of.
+        </p>
       </header>
 
       <div class="achievementList">
-        {achievements.map((achievement, index) => <AchievementCard {...achievement} index={index} />)}
+        {achievements.map((achievement, index) => (
+          <AchievementCard
+            {...achievement}
+            index={index}
+          />
+        ))}
       </div>
     </section>
   </main>
@@ -76,24 +100,27 @@ const achievements = [
 }
 
 .header {
-  max-width: 43rem;
-  margin-bottom: 3.5rem;
+  max-width: 48rem;
+  margin: 0 auto 3.5rem;
+  text-align: center;
 }
 
 h1 {
   margin: 0;
-  color: var(--primary-text);
+  color: var(--accent-color);
   font-family: var(--font-display);
   font-size: clamp(3rem, 7vw, 5.4rem);
+  font-weight: 700;
   letter-spacing: -0.065em;
   line-height: 0.95;
 }
 
 .header p {
-  margin: 1.2rem 0 0;
+  margin: 1.2rem auto 0;
   color: var(--secondary-text);
   font-size: 1.08rem;
   line-height: 1.7;
+  text-align: center;
 }
 
 .achievementList {

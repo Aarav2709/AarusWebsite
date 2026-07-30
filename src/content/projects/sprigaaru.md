@@ -4,5 +4,4 @@ description: "My personal fork of hackclub/sprig, where I make my own games, wri
 tech:
   - JS
 github: "https://github.com/Aarav2709/SprigAaru"
-order: 9
 ---

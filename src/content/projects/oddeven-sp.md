@@ -4,5 +4,4 @@ description: "OddEven-SP, also known as Odd Even: Singleplayer was my first ever
 tech:
   - Python
 github: "https://github.com/Aarav2709/OddEven-SP"
-order: 6
 ---
